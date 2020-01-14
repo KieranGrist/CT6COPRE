@@ -2,11 +2,19 @@
 
 
 #include "Hover.h"
+#include "GameFramework/Actor.h"
+#include "Components/PrimitiveComponent.h"
+#include "GameFramework/PlayerController.h"
+#include "Engine/Public/DrawDebugHelpers.h"
+#include "Kismet/GameplayStatics.h"
+#include "EngineUtils.h"
+#include "Engine/StaticMeshActor.h"
 
 // Sets default values for this component's properties
 UHover::UHover()
 {
 	
+
 
 	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
 	// off to improve performance if you don't need them.
@@ -14,8 +22,14 @@ UHover::UHover()
 
 	// ...
 }
-
-
+void UHover::IncreaseThrust()
+{
+	Thrust += 0.01f;
+}
+void UHover::DecreaseThrust()
+{
+	Thrust += 0.01f;
+}
 // Called when the game starts
 void UHover::BeginPlay()
 {
@@ -33,11 +47,19 @@ void UHover::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponent
 
 	Thrust = FMath::Clamp(Thrust, 0.0f, 1.0f);
 
+
+
+
 	Power = Thrust * Multiplier;
+	if (Cube != NULL || Cube != nullptr)
+	{
+		TArray< UPrimitiveComponent*> Array; 
+	Cube->GetComponents(Array);
+	Array[0]->AddForce(FVector(0,0, Power));
+		
+	}
 
 
-	AActor* Cube = GetOwner();
-	//Cube->AddForce();
 
 	// ...
 }

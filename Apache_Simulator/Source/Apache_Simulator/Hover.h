@@ -27,7 +27,11 @@ public:
 
 	UPROPERTY(EditAnywhere, Category = "Hover")
 		float Height;
+	UPROPERTY(EditAnywhere, Category = "Hover")
+	AActor* Cube;
 protected:
+	void IncreaseThrust();
+	void DecreaseThrust();
 	// Called when the game starts
 	virtual void BeginPlay() override;
 
