@@ -34,7 +34,9 @@ void UHover::DecreaseThrust()
 void UHover::BeginPlay()
 {
 	Super::BeginPlay();
-
+	TArray< UPrimitiveComponent*> Array;
+	Cube->GetComponents(Array);
+	PrimComp = Array[0];
 	// ...
 	
 }
@@ -53,9 +55,8 @@ void UHover::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponent
 	Power = Thrust * Multiplier;
 	if (Cube != NULL || Cube != nullptr)
 	{
-		TArray< UPrimitiveComponent*> Array; 
-	Cube->GetComponents(Array);
-	Array[0]->AddForce(FVector(0,0, Power));
+
+		PrimComp	->AddForce(FVector(0,0, Power));
 		
 	}
 

@@ -29,6 +29,8 @@ public:
 		float Height;
 	UPROPERTY(EditAnywhere, Category = "Hover")
 	AActor* Cube;
+	UPROPERTY(EditAnywhere, Category = "Hover")
+		UPrimitiveComponent* PrimComp;
 protected:
 	void IncreaseThrust();
 	void DecreaseThrust();
