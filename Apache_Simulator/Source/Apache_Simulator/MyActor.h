@@ -4,16 +4,16 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "Apache.generated.h"
+#include "MyActor.generated.h"
 
 UCLASS()
-class APACHE_SIMULATOR_API AApache : public AActor
+class APACHE_SIMULATOR_API AMyActor : public AActor
 {
 	GENERATED_BODY()
 	
 public:	
 	// Sets default values for this actor's properties
-	AApache();
+	AMyActor();
 
 protected:
 	// Called when the game starts or when spawned
@@ -23,5 +23,11 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 	UPROPERTY(EditAnywhere)
-	UStaticMeshComponent* ApacheModel;
+		UPrimitiveComponent * PrimComp;
+	UPROPERTY(EditAnywhere)
+	USceneComponent* SceneComp;
+	UPROPERTY(EditAnywhere)
+		UStaticMeshComponent * Mesh;
+	UPROPERTY(EditAnywhere)
+		AActor * Player;
 };
