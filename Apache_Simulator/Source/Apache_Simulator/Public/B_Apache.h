@@ -4,16 +4,30 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "MyActor.generated.h"
+#include "Helicopter Logic/ApacheEngine.h"
+#include "B_Apache.generated.h"
 
 UCLASS()
-class APACHE_SIMULATOR_API AMyActor : public AActor
+class APACHE_SIMULATOR_API AB_Apache : public AActor
 {
 	GENERATED_BODY()
 	
 public:	
 	// Sets default values for this actor's properties
-	AMyActor();
+	AB_Apache();
+
+	UPROPERTY(EditAnywhere)
+		USceneComponent* Apache_AH64;
+	UPROPERTY(EditAnywhere)
+		UStaticMeshComponent* Body;
+	UPROPERTY(EditAnywhere)
+		UStaticMeshComponent* Tail;
+
+	UPROPERTY(EditAnywhere)
+		UApacheEngine* LeftEngine;
+
+	UPROPERTY(EditAnywhere)
+		UApacheEngine* RightEngine;
 
 protected:
 	// Called when the game starts or when spawned
@@ -22,12 +36,5 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-	UPROPERTY(EditAnywhere)
-		UPrimitiveComponent * PrimComp;
-	UPROPERTY(EditAnywhere)
-	USceneComponent* SceneComp;
-	UPROPERTY(EditAnywhere)
-		UStaticMeshComponent * Mesh;
-	UPROPERTY(EditAnywhere)
-		AActor * Player;
+
 };
