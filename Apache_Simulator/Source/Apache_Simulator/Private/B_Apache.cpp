@@ -29,8 +29,8 @@ void AB_Apache::BeginPlay()
 
 	Super::BeginPlay();
 	FAttachmentTransformRules ARules(EAttachmentRule::KeepWorld, EAttachmentRule::KeepWorld, EAttachmentRule::KeepWorld, false);
-	Rotor->AttachToComponent(Body, ARules);
-	Body->SetSimulatePhysics(false);
+	//Rotor->AttachToComponent(Body, ARules);
+	Body->SetSimulatePhysics(true);
 }
 
 // Called every frame

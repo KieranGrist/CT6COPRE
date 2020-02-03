@@ -1,6 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-
+#include "Components/PrimitiveComponent.h"
+#include "GameFramework/Actor.h"
 #include "ApacheCollective.h"
 
 // Sets default values for this component's properties
@@ -36,8 +37,15 @@ void UApacheCollective::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 
 
 	//0 = -0.5, 50 = 0, 100 = 0.5 
-	
-	 Apache->AddActorLocalOffset(FVector(0, 0 , Collective - .5f));
 
-	}
+
+	PowerToApply = Thrust - Power * .5f;
+	PowerToApply *= Multiplier;
+
+
+	TArray< UPrimitiveComponent*> Array;
+	Apache->GetComponents(Array);
+	if (Array[0])
+		Array[0]->AddForce(FVector(Apache->GetActorUpVector() * PowerToApply));
+}
 

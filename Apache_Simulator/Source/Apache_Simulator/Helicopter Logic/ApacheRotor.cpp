@@ -43,16 +43,16 @@ void UApacheRotor::TickComponent(float DeltaTime, ELevelTick TickType, FActorCom
 	PropellorRotation = FMath::Clamp(PropellorRotation, 0.0f, 7.0f);
 	FRotator  TempRotation = FRotator(0, PropellorRotation, 0);
 	FQuat QuatRotation = FQuat(TempRotation);
-	Rotor->AddActorLocalRotation(QuatRotation, false, 0, ETeleportType::None);
-	if (Cockpit->LeftEngineSwitch->IsOn && Cockpit->RotorBreakSwitch->IsOn == false)
-		RotateRotor();
+	//Rotor->AddActorLocalRotation(QuatRotation, false, 0, ETeleportType::None);
+	//if (Cockpit->LeftEngineSwitch->IsOn && Cockpit->RotorBreakSwitch->IsOn == false)
+	//	RotateRotor();
 
-	if (Cockpit->RightEngineSwitch->IsOn && Cockpit->RotorBreakSwitch->IsOn == false)
-		RotateRotor();
-	if (Cockpit->RightEngineSwitch->IsOn && Cockpit->LeftEngineSwitch->IsOn == false || Cockpit->RightEngineSwitch->IsOn == false && Cockpit->LeftEngineSwitch->IsOn)
-		PropellorRotation -=  RotorTime *0.9f;
-	
-	if (Cockpit->RotorBreakSwitch->IsOn)
-		ApplyBreak();
+	//if (Cockpit->RightEngineSwitch->IsOn && Cockpit->RotorBreakSwitch->IsOn == false)
+	//	RotateRotor();
+	//if (Cockpit->RightEngineSwitch->IsOn && Cockpit->LeftEngineSwitch->IsOn == false || Cockpit->RightEngineSwitch->IsOn == false && Cockpit->LeftEngineSwitch->IsOn)
+	//	PropellorRotation -=  RotorTime *0.9f;
+	//
+	//if (Cockpit->RotorBreakSwitch->IsOn)
+	//	ApplyBreak();
 }
 

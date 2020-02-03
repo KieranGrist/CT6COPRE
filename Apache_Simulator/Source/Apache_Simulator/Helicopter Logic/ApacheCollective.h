@@ -13,27 +13,29 @@ class APACHE_SIMULATOR_API UApacheCollective : public UActorComponent
 {
 	GENERATED_BODY()
 
-public:	
+public:
 	// Sets default values for this component's properties
 	UApacheCollective();
 	UPROPERTY(EditAnywhere)
 		float Collective;
-		UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere)
 		float Power;
-		UPROPERTY(EditAnywhere)
-			AB_Apache* Apache;
+	UPROPERTY(EditAnywhere)
+		AB_Apache* Apache;
 
-		UPROPERTY(EditAnywhere)
-			float Thrust;
-
-
+	UPROPERTY(EditAnywhere)
+		float Thrust =0;
+	UPROPERTY(EditAnywhere)
+		float PowerToApply =0;
+	UPROPERTY(EditAnywhere)
+		float Multiplier = 51318.222656;
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
 
-public:	
+public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
-		
+
 };
