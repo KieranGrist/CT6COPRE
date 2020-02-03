@@ -3,6 +3,7 @@
 
 #include "B_Apache.h"
 #include "Helicopter Logic/ApacheEngine.h"
+#include "Helicopter Logic/ApacheCollective.h"
 #include "Components/StaticMeshComponent.h"
 #include "Engine/EngineTypes.h"
 // Sets default values
@@ -27,6 +28,8 @@ void AB_Apache::BeginPlay()
 {
 
 	Super::BeginPlay();
+	FAttachmentTransformRules ARules(EAttachmentRule::KeepWorld, EAttachmentRule::KeepWorld, EAttachmentRule::KeepWorld, false);
+	Rotor->AttachToComponent(Body, ARules);
 	Body->SetSimulatePhysics(false);
 }
 

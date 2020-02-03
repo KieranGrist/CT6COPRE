@@ -7,6 +7,7 @@
 #include "Switches/RotorBreakSwitch.h"
 #include "GameFramework/Actor.h"
 #include "B_Apache.h"
+#include "Helicopter Logic/ApacheCollective.h"
 #include "Cockpit.generated.h"
 
 UCLASS()
@@ -26,6 +27,8 @@ public:
 	UEngineSwitch* RightEngineSwitch;
 	UPROPERTY(EditAnywhere, Category = "Pilot")
 		URotorBreakSwitch* RotorBreakSwitch;
+	UPROPERTY(EditAnywhere, Category = "Pilot")
+		UApacheCollective* Collective;
 	
 protected:
 	// Called when the game starts or when spawned

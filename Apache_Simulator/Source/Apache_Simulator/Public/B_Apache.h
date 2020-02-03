@@ -19,6 +19,8 @@ public:
 	UPROPERTY(EditAnywhere)
 		USceneComponent* Apache_AH64;
 	UPROPERTY(EditAnywhere)
+		AActor* Rotor;
+	UPROPERTY(EditAnywhere)
 		UStaticMeshComponent* Body;
 	UPROPERTY(EditAnywhere)
 		UStaticMeshComponent* Tail;
@@ -28,6 +30,8 @@ public:
 
 	UPROPERTY(EditAnywhere)
 		UApacheEngine* RightEngine;
+
+
 
 protected:
 	// Called when the game starts or when spawned

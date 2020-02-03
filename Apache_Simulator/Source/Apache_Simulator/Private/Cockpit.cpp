@@ -15,6 +15,7 @@ ACockpit::ACockpit()
 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
+	Collective = CreateDefaultSubobject <UApacheCollective>("Collective");
 
 
 }
@@ -23,6 +24,7 @@ ACockpit::ACockpit()
 void ACockpit::BeginPlay()
 {
 	Super::BeginPlay();
+	Collective->Apache = Apache;
 	if (Apache)
 		if (Apache->RightEngine)
 			RightEngineSwitch->ApacheEngine = Apache->RightEngine;

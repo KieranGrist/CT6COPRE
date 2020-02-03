@@ -1,10 +1,10 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "RotorBreakSwitch.h"
+#include "ApacheCollective.h"
 
 // Sets default values for this component's properties
-URotorBreakSwitch::URotorBreakSwitch()
+UApacheCollective::UApacheCollective()
 {
 	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
 	// off to improve performance if you don't need them.
@@ -15,20 +15,29 @@ URotorBreakSwitch::URotorBreakSwitch()
 
 
 // Called when the game starts
-void URotorBreakSwitch::BeginPlay()
+void UApacheCollective::BeginPlay()
 {
 	Super::BeginPlay();
-	IsOn = true;
+
 	// ...
 	
 }
 
 
 // Called every frame
-void URotorBreakSwitch::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
+void UApacheCollective::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+	Power = Apache->LeftEngine->Power + Apache->RightEngine->Power;
+	Collective = FMath::Clamp(Collective, 0.0f, 1.0f);
+	Thrust = Collective * 100;
 
-	// ...
-}
+	Thrust = FMath::Clamp(Thrust, 0.0F, Power);
+
+
+	//0 = -0.5, 50 = 0, 100 = 0.5 
+	
+	 Apache->AddActorLocalOffset(FVector(0, 0 , Collective - .5f));
+
+	}
 

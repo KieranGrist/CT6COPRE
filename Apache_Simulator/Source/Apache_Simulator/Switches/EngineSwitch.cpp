@@ -18,7 +18,7 @@ UEngineSwitch::UEngineSwitch()
 void UEngineSwitch::BeginPlay()
 {
 	Super::BeginPlay();
-
+	IsOn = false;
 	// ...
 	
 }
@@ -29,12 +29,17 @@ void UEngineSwitch::TickComponent(float DeltaTime, ELevelTick TickType, FActorCo
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
+	if (IsOn)
+		ActionWhenOn();
+	else
+		ActionWhenOff();
 	// ...
 }
 
 void UEngineSwitch::ActionWhenOn()
 {
 	ApacheEngine->IsOn = true;
+
 }
 
 void UEngineSwitch::ActionWhenOff()
