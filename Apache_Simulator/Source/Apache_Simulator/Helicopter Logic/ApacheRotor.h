@@ -5,6 +5,9 @@
 #include "CoreMinimal.h"
 #include "B_Apache.h"
 #include "Components/ActorComponent.h"
+#include "Rotor.h"
+#include "ApacheEngine.h"
+#include "Cockpit.h"
 #include "ApacheRotor.generated.h"
 
 
@@ -13,18 +16,32 @@ class APACHE_SIMULATOR_API UApacheRotor : public UActorComponent
 {
 	GENERATED_BODY()
 
-public:	
+public:
 	// Sets default values for this component's properties
 	UApacheRotor();
 	UPROPERTY(EditAnywhere)
-		AActor* Rotor;
+		ARotor* Rotor;
+
+
+	UPROPERTY(EditAnywhere)
+		ACockpit * Cockpit;
+	UPROPERTY(EditAnywhere, Category = "Rotor Properties")
+		float PropellorRotation;
+	
+	UPROPERTY(EditAnywhere, Category = "Rotor Properties")
+		float RotorTime;
+
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
 
-public:	
+	void RotateRotor();
+
+	void ApplyBreak();
+
+public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
-		
+
 };

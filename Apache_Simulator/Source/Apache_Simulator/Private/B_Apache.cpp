@@ -15,6 +15,7 @@ AB_Apache::AB_Apache()
 	Tail = CreateDefaultSubobject<UStaticMeshComponent>("Tail");
 	
 	FAttachmentTransformRules ARules(EAttachmentRule::KeepRelative, EAttachmentRule::KeepRelative, EAttachmentRule::KeepRelative,false);
+Body->AttachToComponent(Apache_AH64, ARules);
 	Tail->AttachToComponent(Body, ARules);
 	RightEngine = CreateDefaultSubobject<UApacheEngine>("RightEngine");
 	LeftEngine = CreateDefaultSubobject<UApacheEngine>("LeftEngine");
@@ -26,7 +27,7 @@ void AB_Apache::BeginPlay()
 {
 
 	Super::BeginPlay();
-	
+	Body->SetSimulatePhysics(false);
 }
 
 // Called every frame

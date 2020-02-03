@@ -14,13 +14,7 @@ ACockpit::ACockpit()
 	LeftEngineSwitch = CreateDefaultSubobject<UEngineSwitch>("LeftEngineSwitch");
 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-	if (Apache)
-		if (Apache->RightEngine)
-			RightEngineSwitch->ApacheEngine = Apache->RightEngine;
 
-	if (Apache)
-		if (Apache->LeftEngine)
-			LeftEngineSwitch->ApacheEngine = Apache->LeftEngine;
 
 
 }
@@ -29,7 +23,13 @@ ACockpit::ACockpit()
 void ACockpit::BeginPlay()
 {
 	Super::BeginPlay();
-	
+	if (Apache)
+		if (Apache->RightEngine)
+			RightEngineSwitch->ApacheEngine = Apache->RightEngine;
+
+	if (Apache)
+		if (Apache->LeftEngine)
+			LeftEngineSwitch->ApacheEngine = Apache->LeftEngine;
 }
 
 // Called every frame

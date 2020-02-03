@@ -26,7 +26,7 @@ public:
 	UEngineSwitch* RightEngineSwitch;
 	UPROPERTY(EditAnywhere, Category = "Pilot")
 		URotorBreakSwitch* RotorBreakSwitch;
-	UPROPERTY(EditAnywhere, Category = "Co Pilot / Gunner")
+	
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;

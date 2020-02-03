@@ -22,13 +22,34 @@ void UApacheRotor::BeginPlay()
 	// ...
 	
 }
+void UApacheRotor::RotateRotor()
+{
+
+	PropellorRotation += RotorTime;
+
+}
+void UApacheRotor::ApplyBreak()
+{
+
+	PropellorRotation -= RotorTime;
+
+}
 
 
 // Called every frame
 void UApacheRotor::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+	PropellorRotation = FMath::Clamp(PropellorRotation, 0.0f, 15.0f);
+	FRotator  TempRotation = FRotator(0, PropellorRotation, 0);
+	FQuat QuatRotation = FQuat(TempRotation);
+	Rotor->AddActorLocalRotation(QuatRotation, false, 0, ETeleportType::None);
+	if (Cockpit->LeftEngineSwitch->IsOn && Cockpit->RotorBreakSwitch->IsOn == false)
+		RotateRotor();
 
-	// ...
+	if (Cockpit->RightEngineSwitch->IsOn && Cockpit->RotorBreakSwitch->IsOn == false)
+		RotateRotor();
+	if (Cockpit->RotorBreakSwitch->IsOn)
+		ApplyBreak();
 }
 

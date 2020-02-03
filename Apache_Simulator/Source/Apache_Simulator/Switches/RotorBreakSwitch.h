@@ -3,12 +3,13 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Switches/B_Switch.h"
 #include "Components/ActorComponent.h"
 #include "RotorBreakSwitch.generated.h"
 
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
-class APACHE_SIMULATOR_API URotorBreakSwitch : public UActorComponent
+class APACHE_SIMULATOR_API URotorBreakSwitch : public UB_Switch
 {
 	GENERATED_BODY()
 

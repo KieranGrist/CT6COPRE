@@ -14,7 +14,6 @@ class APACHE_SIMULATOR_API ARotor : public AActor
 public:	
 	// Sets default values for this actor's properties
 	ARotor();
-
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
