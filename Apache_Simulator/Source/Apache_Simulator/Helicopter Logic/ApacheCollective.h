@@ -29,6 +29,7 @@ public:
 		float PowerToApply =0;
 	UPROPERTY(EditAnywhere)
 		float Multiplier = 51318.222656;
+
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
