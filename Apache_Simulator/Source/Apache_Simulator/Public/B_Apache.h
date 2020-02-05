@@ -32,8 +32,8 @@ public:
 		UApacheEngine* RightEngine;
 	UPROPERTY(EditAnywhere)
 		float LinerDampening;
-
-
+	UPROPERTY(EditAnywhere)
+		float Weight = 5165;
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;

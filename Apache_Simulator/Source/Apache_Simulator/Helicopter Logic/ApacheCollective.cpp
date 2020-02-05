@@ -37,15 +37,20 @@ void UApacheCollective::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 	Thrust = FMath::Clamp(Thrust, 0.0F, Power);
 
 
+
 	//0 = -0.5, 50 = 0, 100 = 0.5 
 
+	Stage1 = PowerToApply = 0;
+	Stage2 = PowerToApply = Thrust - Power * .5f;
+	Stage3=  PowerToApply *= Multiplier;
+	Stage4= PowerToApply *= DeltaTime;
+	if (Power < 2)
+	{
+		PowerToApply = ((-50 * Multiplier) * 100) * DeltaTime;
+	}
+	//*Check if its on the ground if it is do not apply thrust
 
-	PowerToApply = Thrust - (Power * .5f);
-	PowerToApply *= Multiplier;
-	PowerToApply *= DeltaTime;
-
-
-	Apache->Body->AddForce(FVector(Apache->GetActorUpVector() * PowerToApply));
+Apache->Body->AddForce(FVector(Apache->GetActorUpVector() * PowerToApply));
 	if (!PhysicsRef)
 	{
 		TArray< UPrimitiveComponent*> Array;

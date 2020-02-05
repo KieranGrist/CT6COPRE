@@ -40,5 +40,7 @@ void AB_Apache::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	Body->SetLinearDamping(LinerDampening);
+	Body->SetAllMassScale(Weight);
+
 }
 

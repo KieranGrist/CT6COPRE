@@ -24,13 +24,23 @@ public:
 		AB_Apache* Apache;
 
 	UPROPERTY(EditAnywhere)
-		float Thrust =0;
+		float Thrust = 0;
 	UPROPERTY(EditAnywhere)
-		float PowerToApply =0;
+		float PowerToApply = 0;
 	UPROPERTY(EditAnywhere)
 		float Multiplier = 51318.222656;
 
 	UPrimitiveComponent* PhysicsRef;
+
+	UPROPERTY(EditAnywhere)
+		float Stage1;
+	UPROPERTY(EditAnywhere)
+		float	Stage2;
+	UPROPERTY(EditAnywhere)
+		float Stage3;
+	UPROPERTY(EditAnywhere)
+		float 	Stage4;
+
 
 protected:
 	// Called when the game starts
