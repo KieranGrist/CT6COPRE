@@ -1,8 +1,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
-
+#include "ApacheCollective.h"
 #include "Components/PrimitiveComponent.h"
 #include "GameFramework/Actor.h"
-#include "ApacheCollective.h"
+
 
 // Sets default values for this component's properties
 UApacheCollective::UApacheCollective()
@@ -21,7 +21,8 @@ void UApacheCollective::BeginPlay()
 	Super::BeginPlay();
 
 	// ...
-	
+
+
 }
 
 
@@ -30,22 +31,27 @@ void UApacheCollective::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 	Power = Apache->LeftEngine->Power + Apache->RightEngine->Power;
+	Power = FMath::Clamp(Power, 0.0f, 100.0f);
 	Collective = FMath::Clamp(Collective, 0.0f, 1.0f);
 	Thrust = Collective * 100;
-
 	Thrust = FMath::Clamp(Thrust, 0.0F, Power);
 
 
 	//0 = -0.5, 50 = 0, 100 = 0.5 
 
 
-	PowerToApply = Thrust - Power * .5f;
+	PowerToApply = Thrust - (Power * .5f);
 	PowerToApply *= Multiplier;
+	PowerToApply *= DeltaTime;
 
 
-	TArray< UPrimitiveComponent*> Array;
-	Apache->GetComponents(Array);
-	if (Array[0])
-		Array[0]->AddForce(FVector(Apache->GetActorUpVector() * PowerToApply));
+	Apache->Body->AddForce(FVector(Apache->GetActorUpVector() * PowerToApply));
+	if (!PhysicsRef)
+	{
+		TArray< UPrimitiveComponent*> Array;
+		Apache->GetComponents(Array);
+		if (Array[0])
+			PhysicsRef = Array[0];
+	}
 }
 

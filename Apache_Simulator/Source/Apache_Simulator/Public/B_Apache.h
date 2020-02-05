@@ -30,7 +30,8 @@ public:
 
 	UPROPERTY(EditAnywhere)
 		UApacheEngine* RightEngine;
-
+	UPROPERTY(EditAnywhere)
+		float LinerDampening;
 
 
 protected:

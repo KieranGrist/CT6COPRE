@@ -3,6 +3,7 @@
 
 #include "B_Apache.h"
 #include "Helicopter Logic/ApacheEngine.h"
+#include "Components/PrimitiveComponent.h"
 #include "Helicopter Logic/ApacheCollective.h"
 #include "Components/StaticMeshComponent.h"
 #include "Engine/EngineTypes.h"
@@ -31,12 +32,13 @@ void AB_Apache::BeginPlay()
 	FAttachmentTransformRules ARules(EAttachmentRule::KeepWorld, EAttachmentRule::KeepWorld, EAttachmentRule::KeepWorld, false);
 	//Rotor->AttachToComponent(Body, ARules);
 	Body->SetSimulatePhysics(true);
+
 }
 
 // Called every frame
 void AB_Apache::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
+	Body->SetLinearDamping(LinerDampening);
 }
 

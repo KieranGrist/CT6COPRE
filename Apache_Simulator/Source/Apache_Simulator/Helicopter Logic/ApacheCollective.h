@@ -30,6 +30,8 @@ public:
 	UPROPERTY(EditAnywhere)
 		float Multiplier = 51318.222656;
 
+	UPrimitiveComponent* PhysicsRef;
+
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;

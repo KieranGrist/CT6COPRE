@@ -2,6 +2,9 @@
 
 
 #include "Cockpit.h"
+#include "Engine/World.h"
+#include "Components/PrimitiveComponent.h"
+#include "Components/StaticMeshComponent.h"
 #include "Switches/RotorBreakSwitch.h"
 #include "B_Apache.h"
 #include"Switches/EngineSwitch.h"
@@ -38,6 +41,16 @@ void ACockpit::BeginPlay()
 void ACockpit::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
+	if(Collective->PhysicsRef)
+	Speed = Collective->PhysicsRef->GetComponentVelocity().Size();
+	
+	FVector Loc = Apache->Body->GetComponentTransform().GetLocation();
+	FRotator Rot = FRotator(Apache->Body->GetComponentTransform().GetRotation()); 
+	FHitResult Hit ;
+	FVector Start = Loc;
+	FVector End =  -Apache->GetActorUpVector(); 
+	GetWorld()->LineTraceSingleByChannel(Hit, Loc, End, ECC_Visibility);
+Height =	FVector::Distance(Apache->GetTransform().GetLocation(), Hit.Location);
+Height -= 28.685221f;
 }
 

@@ -29,6 +29,10 @@ public:
 		URotorBreakSwitch* RotorBreakSwitch;
 	UPROPERTY(EditAnywhere, Category = "Pilot")
 		UApacheCollective* Collective;
+	UPROPERTY(EditAnywhere)
+		float Speed = 0;
+	UPROPERTY(EditAnywhere)
+		float Height = 0;
 	
 protected:
 	// Called when the game starts or when spawned
