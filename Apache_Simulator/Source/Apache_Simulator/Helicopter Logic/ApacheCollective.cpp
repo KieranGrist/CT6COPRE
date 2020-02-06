@@ -3,6 +3,7 @@
 #include "Components/PrimitiveComponent.h"
 #include "GameFramework/Actor.h"
 #include "GameFramework/Character.h"
+#include "Components/StaticMeshComponent.h"
 #include "B_Apache.h"
 
 // Sets default values for this component's properties
@@ -38,7 +39,7 @@ void UApacheCollective::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 	Thrust = FMath::Clamp(Thrust, 0.0F, Power);
 
 
-		Collective = FMath::Lerp(Collective, .515f, DeltaTime);
+		//Collective = FMath::Lerp(Collective, .515f, DeltaTime);
 
 	//0 = -0.5, 50 = 0, 100 = 0.5 
 
@@ -47,15 +48,16 @@ void UApacheCollective::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 	Stage3=  PowerToApply *= Multiplier;
 	Stage4= PowerToApply *= DeltaTime;
 	if (Power < 2)
+		NoPower(DeltaTime);
+	
+	if (Apache->Rotor->ApacheRotor->PropellorRotation > 6 )
 	{
-		PowerToApply = ((-100 * Multiplier) ) * DeltaTime;
 		Apache->Body->AddForce(FVector(Apache->GetActorUpVector() * PowerToApply));
+		Collective = FMath::Lerp(Collective, .515f, DeltaTime);
 	}
-	//*Check if its on the ground if it is do not apply thrust
-	//if (Apache->Rotor->ApacheRotor->PropellorRotation > 6)
-		Apache->Body->AddForce(FVector(Apache->GetActorUpVector() * PowerToApply));
-
-
+	else 
+		NoPower(DeltaTime);
+	
 	if (!PhysicsRef)
 	{
 		TArray< UPrimitiveComponent*> Array;
@@ -65,3 +67,11 @@ void UApacheCollective::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 	}
 }
 
+void UApacheCollective::NoPower(float DeltaTime)
+{
+
+		Collective = FMath::Lerp(Collective, 0.0f, DeltaTime);
+		PowerToApply = ((-100 * Multiplier)) * DeltaTime;
+		if (Apache->Body->GetRelativeTransform().GetLocation().Z < 31)
+		Apache->Body->AddForce(FVector(Apache->GetActorUpVector() * PowerToApply));
+}

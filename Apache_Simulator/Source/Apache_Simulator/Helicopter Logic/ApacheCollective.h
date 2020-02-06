@@ -28,7 +28,7 @@ public:
 	UPROPERTY(EditAnywhere)
 		float PowerToApply = 0;
 	UPROPERTY(EditAnywhere)
-		float Multiplier = 51318.222656;
+		float Multiplier = 192714653696.0;
 
 	UPrimitiveComponent* PhysicsRef;
 
@@ -49,6 +49,9 @@ protected:
 public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
+
+	void NoPower(float DeltaTime);
+
 
 
 };
