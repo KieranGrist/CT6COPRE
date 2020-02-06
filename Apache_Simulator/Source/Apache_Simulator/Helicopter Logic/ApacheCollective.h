@@ -3,11 +3,11 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "B_Apache.h"
+
 #include "Components/ActorComponent.h"
 #include "ApacheCollective.generated.h"
 
-
+class AB_Apache;
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class APACHE_SIMULATOR_API UApacheCollective : public UActorComponent
 {

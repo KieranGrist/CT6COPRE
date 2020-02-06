@@ -1,30 +1,33 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-#pragma once
+	#pragma once
+
 
 #include "CoreMinimal.h"
-#include "Switches/EngineSwitch.h"
 #include "Switches/RotorBreakSwitch.h"
-#include "GameFramework/Actor.h"
-#include "B_Apache.h"
 #include "Helicopter Logic/ApacheCollective.h"
+#include"Switches/EngineSwitch.h"
+#include "Engine/World.h"
+#include "Components/PrimitiveComponent.h"
+#include "Components/StaticMeshComponent.h"
+#include "GameFramework/Actor.h"
 #include "Cockpit.generated.h"
-
+class AB_Apache;
 UCLASS()
 class APACHE_SIMULATOR_API ACockpit : public AActor
 {
 	GENERATED_BODY()
-	
-public:	
+
+public:
 
 	UPROPERTY(EditAnywhere)
 		AB_Apache* Apache;
 	// Sets default values for this actor's properties
 	ACockpit();
 	UPROPERTY(EditAnywhere, Category = "Pilot")
-	UEngineSwitch* LeftEngineSwitch;
+		UEngineSwitch* LeftEngineSwitch;
 	UPROPERTY(EditAnywhere, Category = "Pilot")
-	UEngineSwitch* RightEngineSwitch;
+		UEngineSwitch* RightEngineSwitch;
 	UPROPERTY(EditAnywhere, Category = "Pilot")
 		URotorBreakSwitch* RotorBreakSwitch;
 	UPROPERTY(EditAnywhere, Category = "Pilot")
@@ -33,12 +36,12 @@ public:
 		float Speed = 0;
 	UPROPERTY(EditAnywhere)
 		float Height = 0;
-	
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-public:	
+public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 

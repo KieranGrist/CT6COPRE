@@ -2,7 +2,8 @@
 #include "ApacheCollective.h"
 #include "Components/PrimitiveComponent.h"
 #include "GameFramework/Actor.h"
-
+#include "GameFramework/Character.h"
+#include "B_Apache.h"
 
 // Sets default values for this component's properties
 UApacheCollective::UApacheCollective()
@@ -37,6 +38,7 @@ void UApacheCollective::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 	Thrust = FMath::Clamp(Thrust, 0.0F, Power);
 
 
+		Collective = FMath::Lerp(Collective, .515f, DeltaTime);
 
 	//0 = -0.5, 50 = 0, 100 = 0.5 
 
@@ -46,11 +48,14 @@ void UApacheCollective::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 	Stage4= PowerToApply *= DeltaTime;
 	if (Power < 2)
 	{
-		PowerToApply = ((-50 * Multiplier) * 100) * DeltaTime;
+		PowerToApply = ((-100 * Multiplier) ) * DeltaTime;
+		Apache->Body->AddForce(FVector(Apache->GetActorUpVector() * PowerToApply));
 	}
 	//*Check if its on the ground if it is do not apply thrust
+	//if (Apache->Rotor->ApacheRotor->PropellorRotation > 6)
+		Apache->Body->AddForce(FVector(Apache->GetActorUpVector() * PowerToApply));
 
-Apache->Body->AddForce(FVector(Apache->GetActorUpVector() * PowerToApply));
+
 	if (!PhysicsRef)
 	{
 		TArray< UPrimitiveComponent*> Array;

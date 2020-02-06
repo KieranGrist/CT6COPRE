@@ -2,8 +2,12 @@
 
 #pragma once
 
+
+
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "Cockpit.h"
+#include "Rotor.h"
 #include "Helicopter Logic/ApacheEngine.h"
 #include "B_Apache.generated.h"
 
@@ -19,11 +23,14 @@ public:
 	UPROPERTY(EditAnywhere)
 		USceneComponent* Apache_AH64;
 	UPROPERTY(EditAnywhere)
-		AActor* Rotor;
-	UPROPERTY(EditAnywhere)
 		UStaticMeshComponent* Body;
 	UPROPERTY(EditAnywhere)
 		UStaticMeshComponent* Tail;
+
+	UPROPERTY(EditAnywhere)
+		ACockpit* Cockpit;
+	UPROPERTY(EditAnywhere)
+	ARotor* Rotor;
 
 	UPROPERTY(EditAnywhere)
 		UApacheEngine* LeftEngine;
@@ -31,7 +38,7 @@ public:
 	UPROPERTY(EditAnywhere)
 		UApacheEngine* RightEngine;
 	UPROPERTY(EditAnywhere)
-		float LinerDampening;
+		float LinerDampening =60;
 	UPROPERTY(EditAnywhere)
 		float Weight = 5165;
 protected:

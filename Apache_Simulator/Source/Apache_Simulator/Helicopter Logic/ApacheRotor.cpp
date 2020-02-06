@@ -2,7 +2,7 @@
 
 
 #include "ApacheRotor.h"
-
+#include "B_Apache.h"
 // Sets default values for this component's properties
 UApacheRotor::UApacheRotor()
 {
@@ -43,16 +43,16 @@ void UApacheRotor::TickComponent(float DeltaTime, ELevelTick TickType, FActorCom
 	PropellorRotation = FMath::Clamp(PropellorRotation, 0.0f, 7.0f);
 	FRotator  TempRotation = FRotator(0, PropellorRotation, 0);
 	FQuat QuatRotation = FQuat(TempRotation);
-	//Rotor->AddActorLocalRotation(QuatRotation, false, 0, ETeleportType::None);
-	//if (Cockpit->LeftEngineSwitch->IsOn && Cockpit->RotorBreakSwitch->IsOn == false)
-	//	RotateRotor();
+	Apache->Rotor->AddActorLocalRotation(QuatRotation, false, 0, ETeleportType::None);
+	if (Apache->Cockpit->LeftEngineSwitch->IsOn && Apache->Cockpit->RotorBreakSwitch->IsOn == false)
+		RotateRotor();
 
-	//if (Cockpit->RightEngineSwitch->IsOn && Cockpit->RotorBreakSwitch->IsOn == false)
-	//	RotateRotor();
-	//if (Cockpit->RightEngineSwitch->IsOn && Cockpit->LeftEngineSwitch->IsOn == false || Cockpit->RightEngineSwitch->IsOn == false && Cockpit->LeftEngineSwitch->IsOn)
-	//	PropellorRotation -=  RotorTime *0.9f;
-	//
-	//if (Cockpit->RotorBreakSwitch->IsOn)
-	//	ApplyBreak();
+	if (Apache->Cockpit->RightEngineSwitch->IsOn && Apache->Cockpit->RotorBreakSwitch->IsOn == false)
+		RotateRotor();
+	if (Apache->Cockpit->RightEngineSwitch->IsOn && Apache->Cockpit->LeftEngineSwitch->IsOn == false || Apache->Cockpit->RightEngineSwitch->IsOn == false && Apache->Cockpit->LeftEngineSwitch->IsOn)
+		PropellorRotation -=  RotorTime *0.9f;
+	
+	if (Apache->Cockpit->RotorBreakSwitch->IsOn)
+		ApplyBreak();
 }
 

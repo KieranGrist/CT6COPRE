@@ -2,12 +2,8 @@
 
 
 #include "Cockpit.h"
-#include "Engine/World.h"
-#include "Components/PrimitiveComponent.h"
-#include "Components/StaticMeshComponent.h"
-#include "Switches/RotorBreakSwitch.h"
 #include "B_Apache.h"
-#include"Switches/EngineSwitch.h"
+
 // Sets default values
 ACockpit::ACockpit()
 {

@@ -15,6 +15,8 @@ AB_Apache::AB_Apache()
 	Apache_AH64 = CreateDefaultSubobject<USceneComponent>("Apache_AH64");
 	Body = CreateDefaultSubobject<UStaticMeshComponent>("Body");
 	Tail = CreateDefaultSubobject<UStaticMeshComponent>("Tail");
+	Rotor = CreateDefaultSubobject<ARotor>("Rotor");
+	Cockpit = CreateDefaultSubobject<ACockpit>("Cockpit");
 	
 	FAttachmentTransformRules ARules(EAttachmentRule::KeepRelative, EAttachmentRule::KeepRelative, EAttachmentRule::KeepRelative,false);
 Body->AttachToComponent(Apache_AH64, ARules);
@@ -22,6 +24,11 @@ Body->AttachToComponent(Apache_AH64, ARules);
 	RightEngine = CreateDefaultSubobject<UApacheEngine>("RightEngine");
 	LeftEngine = CreateDefaultSubobject<UApacheEngine>("LeftEngine");
 
+
+	Cockpit->Apache = this;
+	Cockpit->Collective->Apache = this;
+	Rotor->ApacheRotor->Apache = this;
+	
 }
 
 // Called when the game starts or when spawned

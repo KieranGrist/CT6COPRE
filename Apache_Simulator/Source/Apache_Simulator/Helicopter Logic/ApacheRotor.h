@@ -3,14 +3,10 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "B_Apache.h"
 #include "Components/ActorComponent.h"
-#include "Rotor.h"
-#include "ApacheEngine.h"
-#include "Cockpit.h"
 #include "ApacheRotor.generated.h"
 
-
+class AB_Apache;
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class APACHE_SIMULATOR_API UApacheRotor : public UActorComponent
 {
@@ -20,11 +16,8 @@ public:
 	// Sets default values for this component's properties
 	UApacheRotor();
 	UPROPERTY(EditAnywhere)
-		ARotor* Rotor;
+		AB_Apache* Apache;
 
-
-	UPROPERTY(EditAnywhere)
-		ACockpit * Cockpit;
 	UPROPERTY(EditAnywhere, Category = "Rotor Properties")
 		float PropellorRotation;
 	

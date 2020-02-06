@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Helicopter Logic/ApacheRotor.h"
 #include "GameFramework/Actor.h"
 #include "Rotor.generated.h"
 
@@ -10,15 +11,23 @@ UCLASS()
 class APACHE_SIMULATOR_API ARotor : public AActor
 {
 	GENERATED_BODY()
-	
-public:	
+
+public:
 	// Sets default values for this actor's properties
 	ARotor();
+	UPROPERTY(EditAnywhere)
+	USceneComponent* RotorSceneComponent;
+	UPROPERTY(EditAnywhere)
+		UStaticMeshComponent* RotorMesh;
+
+	UPROPERTY(EditAnywhere)
+		UApacheRotor* ApacheRotor;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-public:	
+public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
