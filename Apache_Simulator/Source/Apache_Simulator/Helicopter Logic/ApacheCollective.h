@@ -40,8 +40,8 @@ public:
 		float Stage3;
 	UPROPERTY(EditAnywhere, Category = "Debug")
 		float 	Stage4;
-
-
+	UPROPERTY(EditAnywhere, Category = "Debug")
+		FVector UpVector;
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;

@@ -39,29 +39,29 @@ void UApacheCollective::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 	Thrust = FMath::Clamp(Thrust, 0.0F, Power);
 
 
-		//Collective = FMath::Lerp(Collective, .515f, DeltaTime);
+	//Collective = FMath::Lerp(Collective, .515f, DeltaTime);
 
-	//0 = -0.5, 50 = 0, 100 = 0.5 
+//0 = -0.5, 50 = 0, 100 = 0.5 
 
 	Stage1 = PowerToApply = 0;
 	Stage2 = PowerToApply = Thrust - Power * .5f;
-	Stage3=  PowerToApply *= Multiplier;
-	Stage4= PowerToApply *= DeltaTime;
+	Stage3 = PowerToApply *= Multiplier;
+	Stage4 = PowerToApply *= DeltaTime;
 	if (Power < 2)
 		NoPower(DeltaTime);
-	
-	
-		Collective = FMath::Lerp(Collective, .515f, DeltaTime);
-	
 
-	if (Apache->MainRotor->ApacheRotor->PropellorRotation > 6 )
+
+//	Collective = FMath::Lerp(Collective, .515f, DeltaTime);
+	UpVector = Apache->MainRotor->GetActorUpVector();
+
+	if (Apache->MainRotor->ApacheRotor->PropellorRotation > 6)
 	{
-		Apache->Body->AddForce(FVector(Apache->GetActorUpVector() * PowerToApply));
-	
+		Apache->Body->AddForce(FVector(Apache->MainRotor->GetActorUpVector() * PowerToApply));
+
 	}
-	else 
+	else
 		NoPower(DeltaTime);
-	
+
 	if (!PhysicsRef)
 	{
 		TArray< UPrimitiveComponent*> Array;
@@ -77,5 +77,5 @@ void UApacheCollective::NoPower(float DeltaTime)
 		Collective = FMath::Lerp(Collective, 0.0f, DeltaTime);
 		PowerToApply = ((-100 * Multiplier)) * DeltaTime;
 		if (Apache->Body->GetRelativeTransform().GetLocation().Z > 121)
-			Apache->Body->AddForce(FVector(Apache->GetActorUpVector() * PowerToApply));
+			Apache->Body->AddForce(FVector(Apache->MainRotor->GetActorUpVector() * PowerToApply));
 }

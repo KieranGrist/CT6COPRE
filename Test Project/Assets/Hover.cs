@@ -9,12 +9,12 @@ public class ApacheEngine
     public void EngineOn()
     {
 
-        Power += 0.008f;
+        Power += 0.08f;
         Power = Mathf.Clamp(Power, 0, 50);
     }
     public void EngineOff()
     {
-        Power -= 0.08f;
+        Power -= 0.8f;
         Power = Mathf.Clamp(Power, 0, 50);
     }
 }
@@ -31,12 +31,16 @@ public class ApacheCollective
 [System.Serializable]
 public class Hover : MonoBehaviour
 {
+    public GameObject Rotor;
     public ApacheCollective apacheCollective;
     public ApacheEngine LeftEngine, RightEngine;
+    public Rigidbody rigidbody;
+    public Vector3 Up, Forward;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        rigidbody = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -66,27 +70,15 @@ public class Hover : MonoBehaviour
         apacheCollective.PowerToApply = 0;
         apacheCollective.PowerToApply = apacheCollective.Thrust - apacheCollective.Power * .5f;
         apacheCollective.PowerToApply *= apacheCollective.Multiplier;
-        apacheCollective.PowerToApply *= Time.deltaTime;
+      apacheCollective.PowerToApply *= Time.deltaTime;
+        
 
+        Up = Rotor.transform.up;
+        Forward = Rotor. transform.forward;
+        //        apacheCollective.Collective = Mathf.Lerp(apacheCollective.Collective, .515f, Time.deltaTime);
 
+        rigidbody.AddForce(Rotor.transform.up * apacheCollective.PowerToApply);
+       
 
-        Collective = FMath::Lerp(Collective, .515f, DeltaTime);
-
-
-        if (Apache->MainRotor->ApacheRotor->PropellorRotation > 6)
-        {
-            Apache->Body->AddForce(FVector(Apache->GetActorUpVector() * PowerToApply));
-
-        }
-        else
-            NoPower(DeltaTime);
-
-        if (!PhysicsRef)
-        {
-            TArray<UPrimitiveComponent*> Array;
-            Apache->GetComponents(Array);
-            if (Array[0])
-                PhysicsRef = Array[0];
-        }
     }
 }
