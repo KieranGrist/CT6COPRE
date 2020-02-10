@@ -7,7 +7,7 @@
 #include "ApacheRotor.generated.h"
 
 class AB_Apache;
-class UApacheRotor;
+class ARotor;
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class APACHE_SIMULATOR_API UApacheRotor : public UActorComponent
 {
@@ -19,7 +19,8 @@ public:
 	UPROPERTY(EditAnywhere)
 		AB_Apache* Apache;
 	UPROPERTY(EditAnywhere)
-		UApacheRotor*  Rotor;
+		ARotor*  Rotor;
+
 	UPROPERTY(EditAnywhere, Category = "Rotor Properties")
 		float PropellorRotation;
 	

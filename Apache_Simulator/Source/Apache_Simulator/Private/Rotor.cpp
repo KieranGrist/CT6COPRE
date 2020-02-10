@@ -8,17 +8,22 @@
 // Sets default values
 ARotor::ARotor()
 {
- 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
+	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-	ApacheRotor = CreateDefaultSubobject<UApacheRotor>("ApacheRotor");
+
 	RotorSceneComponent = CreateDefaultSubobject<USceneComponent>("RotorSceneComponent");
 	RotorMesh = CreateDefaultSubobject<UStaticMeshComponent>("RotorMesh");
+	ApacheRotor = CreateDefaultSubobject<UApacheRotor>("ApacheRotor");
+	ApacheRotor->Rotor = this;
 
+	FAttachmentTransformRules ARules(EAttachmentRule::KeepRelative, EAttachmentRule::KeepRelative, EAttachmentRule::KeepRelative, false);
+	RotorMesh->AttachToComponent(RotorSceneComponent, ARules);
 }
 
 // Called when the game starts or when spawned
 void ARotor::BeginPlay()
 {
+	ApacheRotor->Rotor = this;
 	Super::BeginPlay();
 	RotorMesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	

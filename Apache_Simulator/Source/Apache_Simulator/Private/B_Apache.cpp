@@ -35,6 +35,7 @@ void AB_Apache::BeginPlay()
 	Super::BeginPlay();
 	FAttachmentTransformRules ARules(EAttachmentRule::KeepWorld, EAttachmentRule::KeepWorld, EAttachmentRule::KeepWorld, false);
 	MainRotor->AttachToComponent(Body, ARules);
+	TailRotor->AttachToComponent(Body, ARules);
 	Body->SetSimulatePhysics(true);
 
 }
