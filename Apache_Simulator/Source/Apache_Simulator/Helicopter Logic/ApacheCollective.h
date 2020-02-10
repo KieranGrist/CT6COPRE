@@ -32,13 +32,13 @@ public:
 
 	UPrimitiveComponent* PhysicsRef;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = "Debug")
 		float Stage1;
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = "Debug")
 		float	Stage2;
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = "Debug")
 		float Stage3;
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = "Debug")
 		float 	Stage4;
 
 

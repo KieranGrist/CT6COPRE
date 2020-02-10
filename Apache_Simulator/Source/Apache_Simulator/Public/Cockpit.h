@@ -11,6 +11,7 @@
 #include "Components/PrimitiveComponent.h"
 #include "Components/StaticMeshComponent.h"
 #include "GameFramework/Actor.h"
+#include "Helicopter Logic/ApacheJoystick.h"
 #include "Cockpit.generated.h"
 class AB_Apache;
 UCLASS()
@@ -31,7 +32,7 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Pilot")
 		URotorBreakSwitch* RotorBreakSwitch;
 	UPROPERTY(EditAnywhere, Category = "Pilot")
-		UApacheCollective* Joystick;
+		UApacheJoystick* Joystick;
 	UPROPERTY(EditAnywhere, Category = "Pilot")
 		UApacheCollective* Collective;
 	UPROPERTY(EditAnywhere)
