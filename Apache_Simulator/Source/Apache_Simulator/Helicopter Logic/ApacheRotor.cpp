@@ -43,7 +43,7 @@ void UApacheRotor::TickComponent(float DeltaTime, ELevelTick TickType, FActorCom
 	PropellorRotation = FMath::Clamp(PropellorRotation, 0.0f, 7.0f);
 	FRotator  TempRotation = FRotator(0, PropellorRotation, 0);
 	FQuat QuatRotation = FQuat(TempRotation);
-	Apache->Rotor->AddActorLocalRotation(QuatRotation, false, 0, ETeleportType::None);
+	Apache->MainRotor->AddActorLocalRotation(QuatRotation, false, 0, ETeleportType::None);
 	if (Apache->Cockpit->LeftEngineSwitch->IsOn && Apache->Cockpit->RotorBreakSwitch->IsOn == false)
 		RotateRotor();
 

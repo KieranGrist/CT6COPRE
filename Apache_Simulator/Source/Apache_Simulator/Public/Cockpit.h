@@ -31,6 +31,8 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Pilot")
 		URotorBreakSwitch* RotorBreakSwitch;
 	UPROPERTY(EditAnywhere, Category = "Pilot")
+		UApacheCollective* Joystick;
+	UPROPERTY(EditAnywhere, Category = "Pilot")
 		UApacheCollective* Collective;
 	UPROPERTY(EditAnywhere)
 		float Speed = 0;

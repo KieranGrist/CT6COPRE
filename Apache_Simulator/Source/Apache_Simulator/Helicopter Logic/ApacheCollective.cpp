@@ -50,10 +50,14 @@ void UApacheCollective::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 	if (Power < 2)
 		NoPower(DeltaTime);
 	
-	if (Apache->Rotor->ApacheRotor->PropellorRotation > 6 )
+	
+		Collective = FMath::Lerp(Collective, .515f, DeltaTime);
+	
+
+	if (Apache->MainRotor->ApacheRotor->PropellorRotation > 6 )
 	{
 		Apache->Body->AddForce(FVector(Apache->GetActorUpVector() * PowerToApply));
-		Collective = FMath::Lerp(Collective, .515f, DeltaTime);
+	
 	}
 	else 
 		NoPower(DeltaTime);
@@ -72,6 +76,6 @@ void UApacheCollective::NoPower(float DeltaTime)
 
 		Collective = FMath::Lerp(Collective, 0.0f, DeltaTime);
 		PowerToApply = ((-100 * Multiplier)) * DeltaTime;
-		if (Apache->Body->GetRelativeTransform().GetLocation().Z < 31)
-		Apache->Body->AddForce(FVector(Apache->GetActorUpVector() * PowerToApply));
+		if (Apache->Body->GetRelativeTransform().GetLocation().Z > 121)
+			Apache->Body->AddForce(FVector(Apache->GetActorUpVector() * PowerToApply));
 }

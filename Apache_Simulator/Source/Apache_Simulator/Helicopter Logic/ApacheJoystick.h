@@ -4,39 +4,25 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
-#include "ApacheRotor.generated.h"
+#include "ApacheJoystick.generated.h"
 
-class AB_Apache;
-class UApacheRotor;
+
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
-class APACHE_SIMULATOR_API UApacheRotor : public UActorComponent
+class APACHE_SIMULATOR_API UApacheJoystick : public UActorComponent
 {
 	GENERATED_BODY()
 
-public:
+public:	
 	// Sets default values for this component's properties
-	UApacheRotor();
-	UPROPERTY(EditAnywhere)
-		AB_Apache* Apache;
-	UPROPERTY(EditAnywhere)
-		UApacheRotor*  Rotor;
-	UPROPERTY(EditAnywhere, Category = "Rotor Properties")
-		float PropellorRotation;
-	
-	UPROPERTY(EditAnywhere, Category = "Rotor Properties")
-		float RotorTime = .001f;
+	UApacheJoystick();
 
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
 
-	void RotateRotor();
-
-	void ApplyBreak();
-
-public:
+public:	
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
-
+		
 };

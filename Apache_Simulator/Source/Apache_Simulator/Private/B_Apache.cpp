@@ -2,10 +2,6 @@
 
 
 #include "B_Apache.h"
-#include "Helicopter Logic/ApacheEngine.h"
-#include "Components/PrimitiveComponent.h"
-#include "Helicopter Logic/ApacheCollective.h"
-#include "Components/StaticMeshComponent.h"
 #include "Engine/EngineTypes.h"
 // Sets default values
 AB_Apache::AB_Apache()
@@ -15,11 +11,12 @@ AB_Apache::AB_Apache()
 	Apache_AH64 = CreateDefaultSubobject<USceneComponent>("Apache_AH64");
 	Body = CreateDefaultSubobject<UStaticMeshComponent>("Body");
 	Tail = CreateDefaultSubobject<UStaticMeshComponent>("Tail");
-	Rotor = CreateDefaultSubobject<ARotor>("Rotor");
+	MainRotor = CreateDefaultSubobject<ARotor>("MainRotor");
+	TailRotor = CreateDefaultSubobject<ARotor>("TailRotor");
 	Cockpit = CreateDefaultSubobject<ACockpit>("Cockpit");
 	
 	FAttachmentTransformRules ARules(EAttachmentRule::KeepRelative, EAttachmentRule::KeepRelative, EAttachmentRule::KeepRelative,false);
-Body->AttachToComponent(Apache_AH64, ARules);
+	Body->AttachToComponent(Apache_AH64, ARules);
 	Tail->AttachToComponent(Body, ARules);
 	RightEngine = CreateDefaultSubobject<UApacheEngine>("RightEngine");
 	LeftEngine = CreateDefaultSubobject<UApacheEngine>("LeftEngine");
@@ -27,7 +24,7 @@ Body->AttachToComponent(Apache_AH64, ARules);
 
 	Cockpit->Apache = this;
 	Cockpit->Collective->Apache = this;
-	Rotor->ApacheRotor->Apache = this;
+	MainRotor->ApacheRotor->Apache = this;
 	
 }
 
@@ -37,7 +34,7 @@ void AB_Apache::BeginPlay()
 
 	Super::BeginPlay();
 	FAttachmentTransformRules ARules(EAttachmentRule::KeepWorld, EAttachmentRule::KeepWorld, EAttachmentRule::KeepWorld, false);
-	Rotor->AttachToComponent(Body, ARules);
+	MainRotor->AttachToComponent(Body, ARules);
 	Body->SetSimulatePhysics(true);
 
 }
@@ -48,6 +45,7 @@ void AB_Apache::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 	Body->SetLinearDamping(LinerDampening);
 	Body->SetAllMassScale(Weight);
-
+	this->SetActorLocation(Body->GetComponentLocation());
+	this->SetActorRotation(Body->GetComponentQuat());	
 }
 
