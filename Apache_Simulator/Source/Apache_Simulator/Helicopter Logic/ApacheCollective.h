@@ -28,6 +28,8 @@ public:
 	UPROPERTY(EditAnywhere)
 		float PowerToApply = 0;
 	UPROPERTY(EditAnywhere)
+		float Speed;
+	UPROPERTY(EditAnywhere)
 		float Multiplier = 192714653696.0;
 
 	UPrimitiveComponent* PhysicsRef;

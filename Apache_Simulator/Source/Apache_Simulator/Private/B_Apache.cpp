@@ -38,14 +38,14 @@ void AB_Apache::BeginPlay()
 	TailRotor->AttachToComponent(Body, ARules);
 	Body->SetSimulatePhysics(true);
 
+
 }
 
 // Called every frame
 void AB_Apache::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	Body->SetLinearDamping(LinerDampening);
-	Body->SetAllMassScale(Weight);
+	//Body->SetLinearDamping(LinerDampening);
 	this->SetActorLocation(Body->GetComponentLocation());
 	this->SetActorRotation(Body->GetComponentQuat());	
 }

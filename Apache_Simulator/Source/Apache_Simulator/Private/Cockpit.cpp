@@ -16,14 +16,15 @@ ACockpit::ACockpit()
 	PrimaryActorTick.bCanEverTick = true;
 
 	Collective = CreateDefaultSubobject <UApacheCollective>("Collective");
-
-
+	Joystick->Apache = Apache;
+	Collective->Apache = Apache;
 }
 
 // Called when the game starts or when spawned
 void ACockpit::BeginPlay()
 {
 	Super::BeginPlay();
+	Joystick->Apache = Apache;
 	Collective->Apache = Apache;
 	if (Apache)
 		if (Apache->RightEngine)
@@ -39,7 +40,7 @@ void ACockpit::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	if(Collective->PhysicsRef)
-	Speed = Collective->PhysicsRef->GetComponentVelocity().Size();
+		Speed = Collective->PhysicsRef->GetComponentVelocity().Size();
 	
 	FVector Loc = Apache->Body->GetComponentTransform().GetLocation();
 	FRotator Rot = FRotator(Apache->Body->GetComponentTransform().GetRotation()); 
