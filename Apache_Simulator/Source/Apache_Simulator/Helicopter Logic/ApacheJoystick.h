@@ -16,7 +16,11 @@ public:
 	// Sets default values for this component's properties
 	UApacheJoystick();
 	UPROPERTY(EditAnywhere)
-	FQuat JoystickRotation;
+	FVector JoystickRotation;
+	UPROPERTY(EditAnywhere)
+	float Multiplier; 
+	UPROPERTY(EditAnywhere)
+	FVector ApacheRotation;
 	UPROPERTY(EditAnywhere)
 		AB_Apache* Apache;
 protected:

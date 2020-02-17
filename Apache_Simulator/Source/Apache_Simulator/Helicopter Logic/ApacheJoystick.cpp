@@ -31,11 +31,11 @@ void UApacheJoystick::BeginPlay()
 void UApacheJoystick::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-
-	// ...
-	Apache->Body->AddLocalRotation(JoystickRotation);
+	ApacheRotation = JoystickRotation * Multiplier;
+	
+	Apache->Body->AddTorque(JoystickRotation );
 	UE_LOG(LogTemp, Warning, TEXT("Rotation is %s"), *JoystickRotation.ToString());
-	JoystickRotation = FMath::Lerp(JoystickRotation, FQuat(FVector(0,0,0),0.0f), DeltaTime);
+//	JoystickRotation = FMath::Lerp(JoystickRotation, FVector(0,0,0), DeltaTime);
 
 }
 

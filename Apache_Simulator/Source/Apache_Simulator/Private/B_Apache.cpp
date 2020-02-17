@@ -3,6 +3,7 @@
 
 #include "B_Apache.h"
 #include "Engine/EngineTypes.h"
+#include "GameFramework/Actor.h"
 // Sets default values
 AB_Apache::AB_Apache()
 {
@@ -22,23 +23,20 @@ AB_Apache::AB_Apache()
 	LeftEngine = CreateDefaultSubobject<UApacheEngine>("LeftEngine");
 
 
-	Cockpit->Apache = this;
-	Cockpit->Collective->Apache = this;
-	MainRotor->ApacheRotor->Apache = this;
+
 	
 }
 
 // Called when the game starts or when spawned
 void AB_Apache::BeginPlay()
 {
-
+	Cockpit->Apache = this;
+	Cockpit->Collective->Apache = this;
+	MainRotor->ApacheRotor->Apache = this;
 	Super::BeginPlay();
 	FAttachmentTransformRules ARules(EAttachmentRule::KeepWorld, EAttachmentRule::KeepWorld, EAttachmentRule::KeepWorld, false);
 	MainRotor->AttachToComponent(Body, ARules);
 	TailRotor->AttachToComponent(Body, ARules);
-	Body->SetSimulatePhysics(true);
-
-
 }
 
 // Called every frame

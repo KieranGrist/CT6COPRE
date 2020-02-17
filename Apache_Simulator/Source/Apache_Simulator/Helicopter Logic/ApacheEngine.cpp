@@ -41,7 +41,7 @@ void UApacheEngine::TickComponent(float DeltaTime, ELevelTick TickType, FActorCo
 void UApacheEngine::EngineOn()
 {
 	
-	Power += 0.008f;
+	Power += 0.025f;
 }
 void UApacheEngine::EngineOff()
 {

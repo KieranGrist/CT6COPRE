@@ -23,8 +23,7 @@ class APACHE_SIMULATOR_API AB_Apache : public AActor
 public:	
 	// Sets default values for this actor's properties
 	AB_Apache();
-
-
+	
 
 	UPROPERTY(EditAnywhere)
 		USceneComponent* Apache_AH64;
