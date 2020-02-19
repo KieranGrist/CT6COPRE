@@ -40,13 +40,9 @@ public:
 		ARotor* TailRotor;
 	UPROPERTY(EditAnywhere)
 		UApacheEngine* LeftEngine;
-
 	UPROPERTY(EditAnywhere)
 		UApacheEngine* RightEngine;
-	UPROPERTY(EditAnywhere)
-		float LinerDampening =60;
-	UPROPERTY(EditAnywhere)
-		float Weight = 5165;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;

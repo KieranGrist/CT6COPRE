@@ -5,6 +5,7 @@
 #include "B_Apache.h"
 #include "Components/StaticMeshComponent.h"
 #include "Components/ActorComponent.h"
+#include "Math/UnrealMathUtility.h"
 #include "Transform.h"
 // Sets default values for this component's properties
 UApacheJoystick::UApacheJoystick()
@@ -31,10 +32,15 @@ void UApacheJoystick::BeginPlay()
 void UApacheJoystick::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+	
+	JoystickRotation.X = FMath::Clamp(JoystickRotation.X, -90.0f, 90.0f);
+	JoystickRotation.Y = FMath::Clamp(JoystickRotation.Y, -90.0f, 90.0f);
+	JoystickRotation.Z = FMath::Clamp(JoystickRotation.Z, -90.0f, 90.0f);
+
 	ApacheRotation = JoystickRotation * Multiplier;
 	
-	Apache->Body->AddTorque(JoystickRotation );
-	UE_LOG(LogTemp, Warning, TEXT("Rotation is %s"), *JoystickRotation.ToString());
+	Apache->Body->AddTorqueInDegrees(JoystickRotation );
+	
 //	JoystickRotation = FMath::Lerp(JoystickRotation, FVector(0,0,0), DeltaTime);
 
 }

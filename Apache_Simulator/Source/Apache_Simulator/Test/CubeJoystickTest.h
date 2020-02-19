@@ -4,34 +4,23 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "Physics.generated.h"
+#include "CubeJoystickTest.generated.h"
 
 UCLASS()
-class APACHE_SIMULATOR_API APhysics : public AActor
+class APACHE_SIMULATOR_API ACubeJoystickTest : public AActor
 {
 	GENERATED_BODY()
 	
 public:	
 	// Sets default values for this actor's properties
-	APhysics();
-
+	ACubeJoystickTest();
 	UPROPERTY(EditAnywhere)
-		USceneComponent* SceneCube;
+		FVector JoystickRotation;
 	UPROPERTY(EditAnywhere)
-		UStaticMeshComponent* Cube;
-	UPrimitiveComponent* PhysicsRef;
+		float Multiplier;
 	UPROPERTY(EditAnywhere)
-		float Collective;
-	UPROPERTY(EditAnywhere)
-		float Power;
-	UPROPERTY(EditAnywhere)
-		float Thrust = 0;
-	UPROPERTY(EditAnywhere)
-		float PowerToApply = 0;
-	UPROPERTY(EditAnywhere)
-		float Speed;
-	UPROPERTY(EditAnywhere)
-		float Multiplier = 0;
+		FVector ApacheRotation;
+	
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
