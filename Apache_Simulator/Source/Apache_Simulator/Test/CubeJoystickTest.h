@@ -4,10 +4,11 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "GameFramework/Pawn.h"
 #include "CubeJoystickTest.generated.h"
 
 UCLASS()
-class APACHE_SIMULATOR_API ACubeJoystickTest : public AActor
+class APACHE_SIMULATOR_API ACubeJoystickTest : public APawn
 {
 	GENERATED_BODY()
 	
@@ -20,7 +21,8 @@ public:
 		float Multiplier;
 	UPROPERTY(EditAnywhere)
 		FVector ApacheRotation;
-	
+	UPROPERTY(EditAnywhere)
+		UStaticMeshComponent* Cube;
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -28,5 +30,16 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent);
+	void PitchUp();
 
+	void PitchDown();
+
+	void YawRight();
+
+	void YawLeft();
+
+	void RollRight();
+
+	void RollLeft();
 };
