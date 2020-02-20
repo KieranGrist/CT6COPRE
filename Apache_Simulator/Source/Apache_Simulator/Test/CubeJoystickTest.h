@@ -23,6 +23,18 @@ public:
 		FVector ApacheRotation;
 	UPROPERTY(EditAnywhere)
 		UStaticMeshComponent* Cube;
+	UPROPERTY(EditAnywhere)
+		UStaticMeshComponent* Gun;
+	UPROPERTY(EditAnywhere)
+		UStaticMeshComponent* Rotor;
+
+	UPROPERTY(EditAnywhere, Category = "Rotor Properties")
+		float PropellorRotation;
+
+	UPROPERTY(EditAnywhere, Category = "Rotor Properties")
+		float RotorTime = .001f;
+	UPROPERTY(EditAnywhere, Category = "Rotor Properties")
+		bool Break;
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -30,6 +42,8 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+	void RotateRotor();
+	void ApplyBreak();
 	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent);
 	void PitchUp();
 

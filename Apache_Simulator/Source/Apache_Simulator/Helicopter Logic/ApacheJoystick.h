@@ -23,13 +23,27 @@ public:
 	FVector ApacheRotation;
 	UPROPERTY(EditAnywhere)
 		AB_Apache* Apache;
+	UPROPERTY(VisibleAnywhere)
+		UInputComponent* InputComponent = nullptr;
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
+
 
 public:	
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
+	void PitchUp();
+
+	void PitchDown();
+
+	void YawRight();
+
+	void YawLeft();
+
+	void RollRight();
+
+	void RollLeft();
 		
 };

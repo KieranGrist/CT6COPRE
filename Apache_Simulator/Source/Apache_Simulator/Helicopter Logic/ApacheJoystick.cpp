@@ -22,12 +22,48 @@ UApacheJoystick::UApacheJoystick()
 void UApacheJoystick::BeginPlay()
 {
 	Super::BeginPlay();
-
+	InputComponent = Apache->FindComponentByClass<UInputComponent>();
 	// ...
-	
+	if (InputComponent)
+	{
+		InputComponent->BindAction("Pitch Up", IE_Pressed, this, &UApacheJoystick::PitchUp);
+		InputComponent->BindAction("Pitch Down", IE_Pressed, this, &UApacheJoystick::PitchDown);
+		InputComponent->BindAction("Yaw Right", IE_Pressed, this, &UApacheJoystick::YawRight);
+		InputComponent->BindAction("Yaw Left", IE_Pressed, this, &UApacheJoystick::YawLeft);
+		InputComponent->BindAction("Roll Right", IE_Pressed, this, &UApacheJoystick::RollRight);
+		InputComponent->BindAction("Roll Left", IE_Pressed, this, &UApacheJoystick::RollLeft);
+
+	}
+	else
+	{
+	UE_LOG(LogTemp, Error, TEXT("%s missing input component"), *GetOwner()->GetName())
+	}
 }
 
-
+void UApacheJoystick::PitchUp()
+{
+	JoystickRotation.Y -= 10;
+}
+void UApacheJoystick::PitchDown()
+{
+	JoystickRotation.Y += 10;
+}
+void UApacheJoystick::YawRight()
+{
+	JoystickRotation.Z += 10;
+}
+void UApacheJoystick::YawLeft()
+{
+	JoystickRotation.Z -= 10;
+}
+void UApacheJoystick::RollRight()
+{
+	JoystickRotation.X -= 10;
+}
+void UApacheJoystick::RollLeft()
+{
+	JoystickRotation.X += 10;
+}
 // Called every frame
 void UApacheJoystick::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {

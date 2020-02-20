@@ -30,9 +30,9 @@ void ARotor::BeginPlay()
 }
 
 // Called every frame
-void ARotor::Tick(float DeltaTime)
+void ARotor::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
-	Super::Tick(DeltaTime);
+	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
 }
 

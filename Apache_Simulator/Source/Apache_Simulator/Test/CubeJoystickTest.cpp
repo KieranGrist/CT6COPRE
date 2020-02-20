@@ -7,12 +7,14 @@
 #include "Components/InputComponent.h"
 #include "Camera/CameraComponent.h"
 #include "Components/StaticMeshComponent.h"
+#include "Components/SceneComponent.h"
 #include "Components/LightComponent.h"
 #include "Components/SpotLightComponent.h"
+#include "Helicopter Logic/ApacheJoystick.h"
 // Sets default values
 ACubeJoystickTest::ACubeJoystickTest()
 {
- 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
+	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 	// Set this pawn to be controlled by the lowest-numbered player
 	AutoPossessPlayer = EAutoReceiveInput::Player0;
@@ -23,38 +25,28 @@ ACubeJoystickTest::ACubeJoystickTest()
 
 	UCameraComponent* OurCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("OurCamera"));
 	Cube = CreateDefaultSubobject<UStaticMeshComponent>("Cube");
-	Multiplier = 387889.375f;
+
+
+
+	Multiplier = 20065116.0f;
 
 	// Attach our camera and visible object to our root component. Offset and rotate the camera.
-	OurCamera->SetupAttachment(RootComponent);
+
 	OurCamera->SetRelativeLocation(FVector(-250.0f, 0.0f, 250.0f));
 	OurCamera->SetRelativeRotation(FRotator(-45.0f, 0.0f, 0.0f));
-	Cube->SetupAttachment(RootComponent);
+
+	Rotor = CreateDefaultSubobject<UStaticMeshComponent>("Rotor");
+	Gun = CreateDefaultSubobject<UStaticMeshComponent>("Gun");
+	Gun->SetRelativeLocation(FVector(350.0, 0, -90.0f));
+	Rotor->SetRelativeLocation(FVector(0, 0, 51.0f));
+	FAttachmentTransformRules ARules(EAttachmentRule::KeepRelative, EAttachmentRule::KeepRelative, EAttachmentRule::KeepRelative, false);
+	OurCamera->SetupAttachment(Cube);
+	Cube->AttachToComponent(RootComponent, ARules);
+	Rotor->AttachToComponent(Cube, ARules);
+	Gun->AttachToComponent(Cube, ARules);
 	
-}
-void ACubeJoystickTest::PitchUp()
-{
-	JoystickRotation.X+=10;
-}
-void ACubeJoystickTest::PitchDown()
-{
-	JoystickRotation.X-=10;
-}
-void ACubeJoystickTest::YawRight()
-{
-	JoystickRotation.Y+=10;
-}
-void ACubeJoystickTest::YawLeft()
-{
-	JoystickRotation.Y-=10;
-}
-void ACubeJoystickTest::RollRight()
-{
-	JoystickRotation.Z+=10;
-}
-void ACubeJoystickTest::RollLeft()
-{
-	JoystickRotation.Z-=10;
+	Rotor->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	Gun->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 }
 // Called when the game starts or when spawned
 void ACubeJoystickTest::BeginPlay()
@@ -63,17 +55,10 @@ void ACubeJoystickTest::BeginPlay()
 	Super::BeginPlay();
 
 }
-
-
 void ACubeJoystickTest::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(InputComponent);
-	InputComponent->BindAction("Pitch Up", IE_Pressed, this, &ACubeJoystickTest::PitchUp);
-	InputComponent->BindAction("Pitch Down", IE_Pressed, this, &ACubeJoystickTest::PitchDown);
-	InputComponent->BindAction("Yaw Right", IE_Pressed, this, &ACubeJoystickTest::YawRight);
-	InputComponent->BindAction("Yaw Left", IE_Pressed, this, &ACubeJoystickTest::YawLeft);
-	InputComponent->BindAction("Roll Right", IE_Pressed, this, &ACubeJoystickTest::RollRight);
-	InputComponent->BindAction("Roll Left", IE_Pressed, this, &ACubeJoystickTest::RollLeft);
+
 }
 // Called every frame
 void ACubeJoystickTest::Tick(float DeltaTime)
@@ -84,6 +69,49 @@ void ACubeJoystickTest::Tick(float DeltaTime)
 	JoystickRotation.Z = FMath::Clamp(JoystickRotation.Z, -90.0f, 90.0f);
 	ApacheRotation = JoystickRotation * Multiplier;	
 	Cube->AddTorqueInDegrees(ApacheRotation);
+	PropellorRotation = FMath::Clamp(PropellorRotation, 0.0f, 7.0f);
+	FRotator  TempRotation = FRotator(PropellorRotation, 0, 0);
+	FQuat QuatRotation = FQuat(TempRotation);
+	Rotor->AddLocalRotation(QuatRotation, false, 0, ETeleportType::None);
+	if (Break)
+		ApplyBreak();
+	else
+		RotateRotor();
+	
+}
+
+void ACubeJoystickTest::RotateRotor()
+{
+	PropellorRotation += RotorTime;
+}
+void ACubeJoystickTest::ApplyBreak()
+{
+
+	PropellorRotation -= RotorTime * 2;
 
 }
 
+void ACubeJoystickTest::PitchUp()
+{
+	JoystickRotation.Y -= 10;
+}
+void ACubeJoystickTest::PitchDown()
+{
+	JoystickRotation.Y += 10;
+}
+void ACubeJoystickTest::YawRight()
+{
+	JoystickRotation.Z += 10;
+}
+void ACubeJoystickTest::YawLeft()
+{
+	JoystickRotation.Z -= 10;
+}
+void ACubeJoystickTest::RollRight()
+{
+	JoystickRotation.X -= 10;
+}
+void ACubeJoystickTest::RollLeft()
+{
+	JoystickRotation.X += 10;
+}

@@ -4,11 +4,12 @@
 
 #include "CoreMinimal.h"
 #include "Helicopter Logic/ApacheRotor.h"
+#include "Components/ActorComponent.h"
 #include "GameFramework/Actor.h"
 #include "Rotor.generated.h"
 
 UCLASS()
-class APACHE_SIMULATOR_API ARotor : public AActor
+class APACHE_SIMULATOR_API ARotor : public UActorComponent
 {
 	GENERATED_BODY()
 
@@ -29,6 +30,6 @@ protected:
 
 public:
 	// Called every frame
-	virtual void Tick(float DeltaTime) override;
+	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)  override;
 
 };

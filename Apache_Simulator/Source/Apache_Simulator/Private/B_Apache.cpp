@@ -3,22 +3,31 @@
 
 #include "B_Apache.h"
 #include "Engine/EngineTypes.h"
+#include "Camera/CameraComponent.h"
 #include "GameFramework/Actor.h"
 // Sets default values
 AB_Apache::AB_Apache()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-	Apache_AH64 = CreateDefaultSubobject<USceneComponent>("Apache_AH64");
+	RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("RootComponent"));
+
 	Body = CreateDefaultSubobject<UStaticMeshComponent>("Body");
 	Tail = CreateDefaultSubobject<UStaticMeshComponent>("Tail");
 	MainRotor = CreateDefaultSubobject<ARotor>("MainRotor");
 	TailRotor = CreateDefaultSubobject<ARotor>("TailRotor");
 	Cockpit = CreateDefaultSubobject<ACockpit>("Cockpit");
-	
+
+
+
+	UCameraComponent* OurCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("OurCamera"));
+	OurCamera->SetRelativeLocation(FVector(-250.0f, 0.0f, 250.0f));
+	OurCamera->SetRelativeRotation(FRotator(-45.0f, 0.0f, 0.0f));
+
 	FAttachmentTransformRules ARules(EAttachmentRule::KeepRelative, EAttachmentRule::KeepRelative, EAttachmentRule::KeepRelative,false);
-	Body->AttachToComponent(Apache_AH64, ARules);
+	Body->AttachToComponent(RootComponent, ARules);
 	Tail->AttachToComponent(Body, ARules);
+	OurCamera->SetupAttachment(Body);
 	RightEngine = CreateDefaultSubobject<UApacheEngine>("RightEngine");
 	LeftEngine = CreateDefaultSubobject<UApacheEngine>("LeftEngine");
 
