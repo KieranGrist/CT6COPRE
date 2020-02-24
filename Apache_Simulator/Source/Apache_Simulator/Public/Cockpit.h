@@ -6,25 +6,25 @@
 #include "CoreMinimal.h"
 #include "Switches/RotorBreakSwitch.h"
 #include "Helicopter Logic/ApacheCollective.h"
-#include "Switches/EngineSwitch.h"
+#include"Switches/EngineSwitch.h"
 #include "Engine/World.h"
 #include "Components/PrimitiveComponent.h"
 #include "Components/StaticMeshComponent.h"
-#include "Components/ActorComponent.h"
 #include "GameFramework/Actor.h"
 #include "Helicopter Logic/ApacheJoystick.h"
 #include "Cockpit.generated.h"
 class AB_Apache;
-UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
-class APACHE_SIMULATOR_API UCockpit : public UActorComponent
+UCLASS()
+class APACHE_SIMULATOR_API ACockpit : public AActor
 {
 	GENERATED_BODY()
 
 public:
-	// Sets default values for this actor's properties
-	UCockpit();
+
 	UPROPERTY(EditAnywhere)
 		AB_Apache* Apache;
+	// Sets default values for this actor's properties
+	ACockpit();
 	UPROPERTY(EditAnywhere, Category = "Pilot")
 		UEngineSwitch* LeftEngineSwitch;
 	UPROPERTY(EditAnywhere, Category = "Pilot")
@@ -46,6 +46,6 @@ protected:
 
 public:
 	// Called every frame
-	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
+	virtual void Tick(float DeltaTime) override;
 
 };

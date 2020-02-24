@@ -4,8 +4,6 @@
 #include "B_Apache.h"
 #include "Engine/EngineTypes.h"
 #include "Components/StaticMeshComponent.h"
-#include "Components/ActorComponent.h"
-#include "Helicopter Logic/ApacheRotor.h"
 #include "Camera/CameraComponent.h"
 #include "GameFramework/Actor.h"
 // Sets default values
@@ -17,13 +15,13 @@ AB_Apache::AB_Apache()
 
 	Body = CreateDefaultSubobject<UStaticMeshComponent>("Body");
 	Tail = CreateDefaultSubobject<UStaticMeshComponent>("Tail");
-	MainRotor = CreateDefaultSubobject<UApacheRotor>("MainRotor");
-	TailRotor = CreateDefaultSubobject<UApacheRotor>("TailRotor");
-	Cockpit = CreateDefaultSubobject<UCockpit>("Cockpit");
+	MainRotor = CreateDefaultSubobject<AApacheRotor>("MainRotor");
+	TailRotor = CreateDefaultSubobject<AApacheRotor>("TailRotor");
+	Cockpit = CreateDefaultSubobject<ACockpit>("Cockpit");
+	Body->SetRelativeRotation(FRotator(0, 0, -90));
 
 
-
-	UCameraComponent* OurCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("OurCamera"));
+OurCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("OurCamera"));
 	OurCamera->SetRelativeLocation(FVector(-250.0f, 0.0f, 250.0f));
 	OurCamera->SetRelativeRotation(FRotator(-45.0f, 0.0f, 0.0f));
 
@@ -46,9 +44,8 @@ void AB_Apache::BeginPlay()
 	Cockpit->Collective->Apache = this;
 	MainRotor->Apache = this;
 	Super::BeginPlay();
-	FAttachmentTransformRules ARules(EAttachmentRule::KeepWorld, EAttachmentRule::KeepWorld, EAttachmentRule::KeepWorld, false);
-	MainRotor->RootComponent->AttachToComponent(Body, ARules);
-	TailRotor->RootComponent->AttachToComponent(Body, ARules);
+
+
 }
 
 // Called every frame

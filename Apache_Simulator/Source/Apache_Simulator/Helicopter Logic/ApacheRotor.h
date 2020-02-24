@@ -3,28 +3,25 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Components/ActorComponent.h"
+#include "GameFramework/Actor.h"
 #include "ApacheRotor.generated.h"
 
 class AB_Apache;
-class ARotor;
-UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
-class APACHE_SIMULATOR_API UApacheRotor : public UActorComponent
+UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
+class APACHE_SIMULATOR_API AApacheRotor : public AActor
 {
 	GENERATED_BODY()
 
 public:
 	// Sets default values for this component's properties
-	UApacheRotor();
+	AApacheRotor();
 	UPROPERTY(EditAnywhere)
 		AB_Apache* Apache;
 	UPROPERTY(EditAnywhere, Category = "Rotor Properties")
 		float PropellorRotation;
-	
+
 	UPROPERTY(EditAnywhere, Category = "Rotor Properties")
 		float RotorTime = .001f;
-	UPROPERTY(EditAnywhere)
-		USceneComponent* RootComponent;
 	UPROPERTY(EditAnywhere)
 		UStaticMeshComponent* Rotor;
 
@@ -38,7 +35,7 @@ protected:
 
 public:
 	// Called every frame
-	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
+	virtual void Tick(float DeltaTime) override;
 
 
 };
