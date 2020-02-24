@@ -5,15 +5,15 @@
 #include "B_Apache.h"
 
 // Sets default values
-UCockpit::UCockpit()
+ACockpit::ACockpit()
 {
-	PrimaryComponentTick.bCanEverTick = true;
 
 	RotorBreakSwitch = CreateDefaultSubobject<URotorBreakSwitch>("RotorBreakSwitch");
 	RightEngineSwitch = CreateDefaultSubobject<UEngineSwitch>("RightEngineSwitch");
 	LeftEngineSwitch = CreateDefaultSubobject<UEngineSwitch>("LeftEngineSwitch");
 	Joystick = CreateDefaultSubobject<UApacheJoystick >("Joystick");
-
+	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
+	PrimaryActorTick.bCanEverTick = true;
 
 	Collective = CreateDefaultSubobject <UApacheCollective>("Collective");
 	Joystick->Apache = Apache;
@@ -21,7 +21,7 @@ UCockpit::UCockpit()
 }
 
 // Called when the game starts or when spawned
-void UCockpit::BeginPlay()
+void ACockpit::BeginPlay()
 {
 	Super::BeginPlay();
 	Joystick->Apache = Apache;
@@ -36,9 +36,9 @@ void UCockpit::BeginPlay()
 }
 
 // Called every frame
-void UCockpit::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) 
+void ACockpit::Tick(float DeltaTime)
 {
-	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+	Super::Tick(DeltaTime);
 	if(Collective->PhysicsRef)
 		Speed = Collective->PhysicsRef->GetComponentVelocity().Size();
 	

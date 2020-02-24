@@ -7,9 +7,10 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "Cockpit.h"
+#include "Camera/CameraComponent.h"
 #include "Components/SceneComponent.h"
-#include "Helicopter Logic/ApacheRotor.h"
 #include "Components/PrimitiveComponent.h"
+#include "Helicopter Logic/ApacheRotor.h"
 #include "GameFramework/Character.h"
 #include "Components/ActorComponent.h"
 #include "Components/StaticMeshComponent.h"
@@ -24,16 +25,18 @@ public:
 	// Sets default values for this actor's properties
 	AB_Apache();
 	UPROPERTY(EditAnywhere)
+	UCameraComponent* OurCamera;
+	UPROPERTY(EditAnywhere)
 		UStaticMeshComponent* Body;
 	UPROPERTY(EditAnywhere)
 		UStaticMeshComponent* Tail;
 
 	UPROPERTY(EditAnywhere)
-		UCockpit* Cockpit;
+		ACockpit* Cockpit;
 	UPROPERTY(EditAnywhere)
-	UApacheRotor* MainRotor;
+ AApacheRotor * MainRotor;
 	UPROPERTY(EditAnywhere)
-		UApacheRotor* TailRotor;
+		AApacheRotor * TailRotor;
 	UPROPERTY(EditAnywhere)
 		UApacheEngine* LeftEngine;
 	UPROPERTY(EditAnywhere)
