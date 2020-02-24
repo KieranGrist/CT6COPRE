@@ -7,13 +7,13 @@
 // Sets default values
 UCockpit::UCockpit()
 {
+	PrimaryComponentTick.bCanEverTick = true;
 
 	RotorBreakSwitch = CreateDefaultSubobject<URotorBreakSwitch>("RotorBreakSwitch");
 	RightEngineSwitch = CreateDefaultSubobject<UEngineSwitch>("RightEngineSwitch");
 	LeftEngineSwitch = CreateDefaultSubobject<UEngineSwitch>("LeftEngineSwitch");
 	Joystick = CreateDefaultSubobject<UApacheJoystick >("Joystick");
-	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryComponentTick.bCanEverTick = true;
+
 
 	Collective = CreateDefaultSubobject <UApacheCollective>("Collective");
 	Joystick->Apache = Apache;

@@ -15,17 +15,16 @@
 #include "Helicopter Logic/ApacheJoystick.h"
 #include "Cockpit.generated.h"
 class AB_Apache;
-UCLASS()
+UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
 class APACHE_SIMULATOR_API UCockpit : public UActorComponent
 {
 	GENERATED_BODY()
 
 public:
-
-	UPROPERTY(EditAnywhere)
-		AB_Apache* Apache;
 	// Sets default values for this actor's properties
 	UCockpit();
+	UPROPERTY(EditAnywhere)
+		AB_Apache* Apache;
 	UPROPERTY(EditAnywhere, Category = "Pilot")
 		UEngineSwitch* LeftEngineSwitch;
 	UPROPERTY(EditAnywhere, Category = "Pilot")
