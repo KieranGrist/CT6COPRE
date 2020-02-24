@@ -26,6 +26,7 @@ OurCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("OurCamera"));
 	OurCamera->SetRelativeRotation(FRotator(-45.0f, 0.0f, 0.0f));
 
 	FAttachmentTransformRules ARules(EAttachmentRule::KeepRelative, EAttachmentRule::KeepRelative, EAttachmentRule::KeepRelative,false);
+	//MainRotor = GetWorld()-> SpawnActor<AApacheRotor>(AApacheRotor::GetClass, new FVector(0, 0, 0), FRotator::ZeroRotator);
 	Body->AttachToComponent(RootComponent, ARules);
 	Tail->AttachToComponent(Body, ARules);
 	OurCamera->SetupAttachment(Body);
