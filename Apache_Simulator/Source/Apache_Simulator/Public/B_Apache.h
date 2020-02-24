@@ -8,7 +8,7 @@
 #include "GameFramework/Actor.h"
 #include "Cockpit.h"
 #include "Components/SceneComponent.h"
-#include "Rotor.h"
+#include "Helicopter Logic/ApacheRotor.h"
 #include "Components/PrimitiveComponent.h"
 #include "GameFramework/Character.h"
 #include "Components/ActorComponent.h"
@@ -29,11 +29,11 @@ public:
 		UStaticMeshComponent* Tail;
 
 	UPROPERTY(EditAnywhere)
-		ACockpit* Cockpit;
+		UCockpit* Cockpit;
 	UPROPERTY(EditAnywhere)
-	ARotor* MainRotor;
+	UApacheRotor* MainRotor;
 	UPROPERTY(EditAnywhere)
-		ARotor* TailRotor;
+		UApacheRotor* TailRotor;
 	UPROPERTY(EditAnywhere)
 		UApacheEngine* LeftEngine;
 	UPROPERTY(EditAnywhere)

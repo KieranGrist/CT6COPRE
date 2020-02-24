@@ -18,14 +18,15 @@ public:
 	UApacheRotor();
 	UPROPERTY(EditAnywhere)
 		AB_Apache* Apache;
-	UPROPERTY(EditAnywhere)
-		ARotor*  Rotor;
-
 	UPROPERTY(EditAnywhere, Category = "Rotor Properties")
 		float PropellorRotation;
 	
 	UPROPERTY(EditAnywhere, Category = "Rotor Properties")
 		float RotorTime = .001f;
+	UPROPERTY(EditAnywhere)
+		USceneComponent* RootComponent;
+	UPROPERTY(EditAnywhere)
+		UStaticMeshComponent* Rotor;
 
 protected:
 	// Called when the game starts

@@ -52,11 +52,11 @@ void UApacheCollective::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 
 	Speed = Apache->Cockpit->Speed;
 //	Collective = FMath::Lerp(Collective, .515f, DeltaTime);
-	UpVector = Apache->MainRotor->GetActorUpVector();
+	UpVector = Apache->MainRotor->Rotor->GetUpVector();
 
-	if (Apache->MainRotor->ApacheRotor->PropellorRotation > 6)
+	if (Apache->MainRotor->PropellorRotation > 6)
 	{
-		Apache->Body->AddForce(FVector(Apache->MainRotor->GetActorUpVector() * PowerToApply));
+		Apache->Body->AddForce(FVector(Apache->MainRotor->Rotor->GetUpVector() * PowerToApply));
 
 	}
 

@@ -4,7 +4,7 @@
 #include "ApacheRotor.h"
 #include "Components/ActorComponent.h"
 #include "Components/SceneComponent.h"
-#include "Rotor.h"
+#include "Components/StaticMeshComponent.h"
 #include "B_Apache.h"
 // Sets default values for this component's properties
 UApacheRotor::UApacheRotor()
@@ -14,6 +14,12 @@ UApacheRotor::UApacheRotor()
 	PrimaryComponentTick.bCanEverTick = true;
 
 	// ...
+	RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("RootComponent"));
+
+	Rotor = CreateDefaultSubobject<UStaticMeshComponent>("Rotor");
+	FAttachmentTransformRules ARules(EAttachmentRule::KeepRelative, EAttachmentRule::KeepRelative, EAttachmentRule::KeepRelative, false);
+	Rotor->AttachToComponent(RootComponent,ARules);
+	Rotor->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 }
 
 
@@ -46,7 +52,7 @@ void UApacheRotor::TickComponent(float DeltaTime, ELevelTick TickType, FActorCom
 	PropellorRotation = FMath::Clamp(PropellorRotation, 0.0f, 7.0f);
 	FRotator  TempRotation = FRotator(0, PropellorRotation, 0);
 	FQuat QuatRotation = FQuat(TempRotation);
-	Rotor->AddActorLocalRotation(QuatRotation, false, 0, ETeleportType::None);
+	Rotor->AddWorldRotation(QuatRotation, false, 0, ETeleportType::None);
 	if (Apache->Cockpit->LeftEngineSwitch->IsOn && Apache->Cockpit->RotorBreakSwitch->IsOn == false)
 		RotateRotor();
 

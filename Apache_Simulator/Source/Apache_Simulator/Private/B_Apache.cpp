@@ -3,6 +3,9 @@
 
 #include "B_Apache.h"
 #include "Engine/EngineTypes.h"
+#include "Components/StaticMeshComponent.h"
+#include "Components/ActorComponent.h"
+#include "Helicopter Logic/ApacheRotor.h"
 #include "Camera/CameraComponent.h"
 #include "GameFramework/Actor.h"
 // Sets default values
@@ -14,9 +17,9 @@ AB_Apache::AB_Apache()
 
 	Body = CreateDefaultSubobject<UStaticMeshComponent>("Body");
 	Tail = CreateDefaultSubobject<UStaticMeshComponent>("Tail");
-	MainRotor = CreateDefaultSubobject<ARotor>("MainRotor");
-	TailRotor = CreateDefaultSubobject<ARotor>("TailRotor");
-	Cockpit = CreateDefaultSubobject<ACockpit>("Cockpit");
+	MainRotor = CreateDefaultSubobject<UApacheRotor>("MainRotor");
+	TailRotor = CreateDefaultSubobject<UApacheRotor>("TailRotor");
+	Cockpit = CreateDefaultSubobject<UCockpit>("Cockpit");
 
 
 
@@ -41,11 +44,11 @@ void AB_Apache::BeginPlay()
 {
 	Cockpit->Apache = this;
 	Cockpit->Collective->Apache = this;
-	MainRotor->ApacheRotor->Apache = this;
+	MainRotor->Apache = this;
 	Super::BeginPlay();
 	FAttachmentTransformRules ARules(EAttachmentRule::KeepWorld, EAttachmentRule::KeepWorld, EAttachmentRule::KeepWorld, false);
-	MainRotor->AttachToComponent(Body, ARules);
-	TailRotor->AttachToComponent(Body, ARules);
+	MainRotor->RootComponent->AttachToComponent(Body, ARules);
+	TailRotor->RootComponent->AttachToComponent(Body, ARules);
 }
 
 // Called every frame
