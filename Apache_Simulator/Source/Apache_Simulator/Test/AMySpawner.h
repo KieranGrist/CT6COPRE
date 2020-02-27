@@ -6,7 +6,7 @@
 #include "GameFramework/Actor.h"
 #include "Helicopter Logic/ApacheRotor.h"
 #include "AMySpawner.generated.h"
-class AApacheRotor;
+class UApacheRotor;
 UCLASS()
 class APACHE_SIMULATOR_API AAMySpawner : public AActor
 {
@@ -16,7 +16,7 @@ public:
 	// Sets default values for this actor's properties
 	AAMySpawner();
 	UPROPERTY(EditAnywhere)
-		AApacheRotor *  ApacheRotor;
+		UApacheRotor *  ApacheRotor;
 
 	UPROPERTY(EditAnywhere)
 	int Iteration =5;

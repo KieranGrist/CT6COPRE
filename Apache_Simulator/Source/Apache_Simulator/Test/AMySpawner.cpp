@@ -15,29 +15,17 @@ AAMySpawner::AAMySpawner()
 void AAMySpawner::BeginPlay()
 {
 	Super::BeginPlay();
-	
+	FVector NewLocation = GetActorLocation() + FVector(0.f, 0.f, 300.f);
+
+	// Spawn the new actor (Using GetClass() instead of AMySpawner so that if someone derives a new class  
+	// from AMySpawner we spawn an instance of that class instead)  
+	auto NewActor = GetWorld()->SpawnActor<UApacheRotor>(ApacheRotor->GetClass(), NewLocation, FRotator::ZeroRotator);
 }
 
 // Called every frame
 void AAMySpawner::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	if (Iteration > 0)
-	{
-		TimeToSpawn -= DeltaTime;
-		if (TimeToSpawn < 0.f)
-		{
-			// Make a location for the new actor to spawn at (300 units above this actor)  
-			FVector NewLocation = GetActorLocation() + FVector(0.f, 0.f, 300.f);
 
-			// Spawn the new actor (Using GetClass() instead of AMySpawner so that if someone derives a new class  
-			// from AMySpawner we spawn an instance of that class instead)  
-		auto NewActor = GetWorld()->SpawnActor<AApacheRotor>(NewLocation, FRotator::ZeroRotator);
-
-			// Housekeeping so that we dont spawn new actors forever  
-		
-			Iteration = 0; // stop ourselves spawning any more  
-		}
-	}
 }
 
