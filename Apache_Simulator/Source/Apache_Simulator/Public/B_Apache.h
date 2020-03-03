@@ -9,7 +9,7 @@
 #include "Cockpit.h"
 #include "Camera/CameraComponent.h"
 #include "Components/SceneComponent.h"
-//#include "Helicopter Logic/ApacheRotor.h"
+#include "Helicopter Logic/ApacheRotor.h"
 #include "Components/PrimitiveComponent.h"
 #include "GameFramework/Character.h"
 #include "Components/ActorComponent.h"
@@ -28,8 +28,8 @@ public:
 	UCameraComponent* OurCamera;
 	UPROPERTY(EditAnywhere, Category = "Main Body")
 		UStaticMeshComponent* Body;
-//	UPROPERTY(EditAnywhere, Category = "Main Body")
-//		UApacheRotor* MainRotor;
+	UPROPERTY(EditAnywhere, Category = "Main Body")
+	UApacheRotor* MainRotor;
 	UPROPERTY(EditAnywhere, Category = "Main Body")
 		UStaticMeshComponent* MainRotorStaticMesh;
 	UPROPERTY(EditAnywhere, Category = "Main Body")
@@ -42,8 +42,8 @@ public:
 
 	UPROPERTY(EditAnywhere, Category = "Tail")
 		UStaticMeshComponent* Tail;
-//	UPROPERTY(EditAnywhere, Category = "Tail")
-	//	UApacheRotor* TailRotor;
+	UPROPERTY(EditAnywhere, Category = "Tail")
+		UApacheRotor* TailRotor;
 	UPROPERTY(EditAnywhere, Category = "Tail")
 		UStaticMeshComponent* TailRotorStaticMesh;
 
