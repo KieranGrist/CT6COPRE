@@ -33,7 +33,7 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Main Body")
 		UStaticMeshComponent* MainRotorStaticMesh;
 	UPROPERTY(EditAnywhere, Category = "Main Body")
-		ACockpit* Cockpit;
+		UCockpit* Cockpit;
 	UPROPERTY(EditAnywhere, Category = "Main Body")
 		UApacheEngine* RightEngine;
 	UPROPERTY(EditAnywhere, Category = "Main Body")

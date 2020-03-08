@@ -55,12 +55,12 @@ void UApacheCollective::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 	
 	//UpVector = Apache->MainRotor->Rotor->GetUpVector();
 
-	//if (Apache->MainRotor->PropellorRotation > 6)
-	//{
-	//	Apache->Body->AddForce(FVector(Apache->MainRotor->Rotor->GetUpVector() * PowerToApply));
+	if (Apache->MainRotor->PropellorRotation > 6)
+	{
+		Apache->Body->AddForce(FVector(Apache->MainRotor->Rotor->GetUpVector() * PowerToApply));
 
-	//}
-	//
+	}
+	
 
 	if (!PhysicsRef)
 	{

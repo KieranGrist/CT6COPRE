@@ -16,6 +16,8 @@ AB_Apache::AB_Apache()
 	Body = CreateDefaultSubobject<UStaticMeshComponent>("Body");
 	Tail = CreateDefaultSubobject<UStaticMeshComponent>("Tail");
 
+	Tail->SetRelativeLocation(FVector(-854.415527f, 0, 81.176666f));
+
 	TailRotorStaticMesh = CreateDefaultSubobject<UStaticMeshComponent>("TailRotorStaticMesh");
 	MainRotorStaticMesh = CreateDefaultSubobject<UStaticMeshComponent>("MainRotorStaticMesh");
 
@@ -25,11 +27,8 @@ AB_Apache::AB_Apache()
 	MainRotor->Rotor = MainRotorStaticMesh;
 	TailRotor->Rotor = TailRotorStaticMesh;
 
-	TailRotorStaticMesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);
-	MainRotorStaticMesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);
-
-	Cockpit = CreateDefaultSubobject<ACockpit>("Cockpit");
-
+	Cockpit = CreateDefaultSubobject<UCockpit>("Cockpit");
+	Cockpit->Apache = this;
 
 OurCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("OurCamera"));
 	OurCamera->SetRelativeLocation(FVector(-250.0f, 0.0f, 250.0f));
@@ -50,10 +49,11 @@ OurCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("OurCamera"));
 // Called when the game starts or when spawned
 void AB_Apache::BeginPlay()
 {
+	Super::BeginPlay();
 	Cockpit->Apache = this;
 	Cockpit->Collective->Apache = this;
-	//MainRotor->Apache = this;
-	Super::BeginPlay();
+	MainRotor->Apache = this;
+	TailRotor -> Apache = this;
 
 
 }

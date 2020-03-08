@@ -10,12 +10,12 @@
 #include "Engine/World.h"
 #include "Components/PrimitiveComponent.h"
 #include "Components/StaticMeshComponent.h"
-#include "GameFramework/Actor.h"
+#include "Components/ActorComponent.h"
 #include "Helicopter Logic/ApacheJoystick.h"
 #include "Cockpit.generated.h"
 class AB_Apache;
 UCLASS()
-class APACHE_SIMULATOR_API ACockpit : public AActor
+class APACHE_SIMULATOR_API UCockpit : public UActorComponent
 {
 	GENERATED_BODY()
 
@@ -24,7 +24,7 @@ public:
 	UPROPERTY(EditAnywhere)
 		AB_Apache* Apache;
 	// Sets default values for this actor's properties
-	ACockpit();
+	UCockpit();
 	UPROPERTY(EditAnywhere, Category = "Pilot")
 		UEngineSwitch* LeftEngineSwitch;
 	UPROPERTY(EditAnywhere, Category = "Pilot")
@@ -46,6 +46,6 @@ protected:
 
 public:
 	// Called every frame
-	virtual void Tick(float DeltaTime) override;
+	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 };
