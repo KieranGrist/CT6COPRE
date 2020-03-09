@@ -17,13 +17,27 @@ public:
 	UFlightPhysics();
 	UPROPERTY(EditAnywhere)
 		AB_Apache* Apache;
+	UPROPERTY(EditAnywhere)
+		FVector Velocity;
+	UPROPERTY(EditAnywhere)
+	FVector Location;
+
+	UPROPERTY(EditAnywhere)
+		FVector Wind;
+	UPROPERTY(EditAnywhere)
+	FVector Gravity;
+
+		
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
-
+	float Delta;
+		float GetDelta();
 public:	
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
-		
+
+	void AddForce(FVector Force);
+
 };

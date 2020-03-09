@@ -44,31 +44,19 @@ void UApacheCollective::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 
 //0 = -0.5, 50 = 0, 100 = 0.5 
 
-	Stage1 = PowerToApply = 0;
-	Stage2 = PowerToApply = Thrust;
-	Stage3 = PowerToApply *= Multiplier;
-	Stage4 = PowerToApply *= DeltaTime;
+	 PowerToApply = 0;
+	 PowerToApply = Thrust;
+ PowerToApply *= Multiplier;
+	 PowerToApply *= DeltaTime;
 
 
-	Speed = Apache->Cockpit->Speed;
-//	Collective = FMath::Lerp(Collective, .515f, DeltaTime);
-	
-	//UpVector = Apache->MainRotor->Rotor->GetUpVector();
 
 	if (Apache->MainRotor->PropellorRotation > 6)
 	{
-		Apache->Body->AddForce(FVector(Apache->MainRotor->Rotor->GetUpVector() * PowerToApply));
+		Apache->FlightPhysics->AddForce(FVector(Apache->MainRotor->Rotor->GetUpVector() * PowerToApply));
 
 	}
 	
-
-	if (!PhysicsRef)
-	{
-		TArray< UPrimitiveComponent*> Array;
-		Apache->GetComponents(Array);
-		if (Array[0])
-			PhysicsRef = Array[0];
-	}
 	
 }
 

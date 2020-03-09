@@ -58,8 +58,9 @@ void UApacheJoystick::TickComponent(float DeltaTime, ELevelTick TickType, FActor
 	JoystickRotation.Z = FMath::Clamp(JoystickRotation.Z, -90.0f, 90.0f);
 
 	ApacheRotation = JoystickRotation * Multiplier;
-	
-	Apache->Body->AddTorqueInDegrees(JoystickRotation );
+
+
+	Apache->AddActorWorldRotation(FRotator(JoystickRotation.X, JoystickRotation.Y, JoystickRotation.Z));
 	
 //	JoystickRotation = FMath::Lerp(JoystickRotation, FVector(0,0,0), DeltaTime);
 

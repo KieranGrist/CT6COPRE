@@ -26,24 +26,19 @@ void UCockpit::BeginPlay()
 	Super::BeginPlay();
 	Joystick->Apache = Apache;
 	Collective->Apache = Apache;
-	if (Apache)
-		if (Apache->RightEngine)
-			RightEngineSwitch->ApacheEngine = Apache->RightEngine;
-
-	if (Apache)
-		if (Apache->LeftEngine)
-			LeftEngineSwitch->ApacheEngine = Apache->LeftEngine;
+	RightEngineSwitch->ApacheEngine = Apache->RightEngine;
+	LeftEngineSwitch->ApacheEngine = Apache->LeftEngine;
 }
 
 // Called every frame
 void UCockpit::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-	if (Collective->PhysicsRef)
-		Speed = Collective->PhysicsRef->GetComponentVelocity().Size();
 
-	FVector Loc = Apache->Body->GetComponentTransform().GetLocation();
-	FRotator Rot = FRotator(Apache->Body->GetComponentTransform().GetRotation());
+		Speed = Apache->FlightPhysics->Velocity.Size();
+
+	FVector Loc = Apache->GetTransform().GetLocation();
+	FRotator Rot = FRotator(Apache->GetTransform().GetRotation());
 	FHitResult Hit;
 	FVector Start = Loc;
 	FVector End = -Apache->GetActorUpVector();

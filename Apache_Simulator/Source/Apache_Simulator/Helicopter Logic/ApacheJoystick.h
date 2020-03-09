@@ -23,8 +23,6 @@ public:
 	FVector ApacheRotation;
 	UPROPERTY(EditAnywhere)
 		AB_Apache* Apache;
-	UPROPERTY(VisibleAnywhere)
-		UInputComponent* InputComponent = nullptr;
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;

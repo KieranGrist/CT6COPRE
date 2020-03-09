@@ -2,6 +2,8 @@
 
 
 #include "FlightPhysics.h"
+#include "Components/StaticMeshComponent.h"
+#include "GameFramework/Actor.h"
 #include "B_Apache.h"
 // Sets default values for this component's properties
 UFlightPhysics::UFlightPhysics()
@@ -23,13 +25,35 @@ void UFlightPhysics::BeginPlay()
 	
 }
 
+void UFlightPhysics::AddForce(FVector Force)
+{
 
+	auto Acceleration = Force / 5165;
+	Velocity += Acceleration * GetDelta();
+}
+float UFlightPhysics::GetDelta()
+
+{
+	return Delta;
+}
 // Called every frame
 void UFlightPhysics::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+	Velocity += Gravity * 5165;
+	Velocity /= 2;
+	Delta = DeltaTime;
+	Location = Apache->GetActorLocation();
 
+	if (Location.Z < -100)
+	{
+		Location =FVector(Location.X, Location.Y, 500);
+		Location = FVector(0, 0, 0);
+	}
+
+	Location += Velocity * Delta;
+	Apache->SetActorLocation(Location);
 	
-	// ...
+
 }
 

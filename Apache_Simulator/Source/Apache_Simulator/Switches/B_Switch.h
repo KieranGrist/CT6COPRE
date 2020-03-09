@@ -15,7 +15,7 @@ class APACHE_SIMULATOR_API UB_Switch : public UActorComponent
 public:	
 	// Sets default values for this component's properties
 	UB_Switch();
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = "Switch")
 		bool IsOn;
 
 protected:

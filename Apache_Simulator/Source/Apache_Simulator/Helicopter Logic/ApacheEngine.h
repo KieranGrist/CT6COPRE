@@ -15,7 +15,7 @@ class APACHE_SIMULATOR_API UApacheEngine : public UActorComponent
 public:	
 	// Sets default values for this component's properties
 	UApacheEngine();
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(VisibleAnywhere)
 		bool IsOn = false;
 	UPROPERTY(EditAnywhere)
 	float Power = 0.0f;

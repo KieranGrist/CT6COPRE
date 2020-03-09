@@ -11,6 +11,7 @@
 #include "Components/SceneComponent.h"
 #include "Helicopter Logic/ApacheRotor.h"
 #include "Components/PrimitiveComponent.h"
+#include "Helicopter Logic/FlightPhysics.h"
 #include "GameFramework/Character.h"
 #include "Components/ActorComponent.h"
 #include "Components/StaticMeshComponent.h"
@@ -25,33 +26,27 @@ public:
 	// Sets default values for this actor's properties
 	AB_Apache();
 	UPROPERTY(EditAnywhere)
-	UCameraComponent* OurCamera;
-	UPROPERTY(EditAnywhere, Category = "Main Body")
-		UStaticMeshComponent* Body;
-	UPROPERTY(EditAnywhere, Category = "Main Body")
-	UApacheRotor* MainRotor;
-	UPROPERTY(EditAnywhere, Category = "Main Body")
-		UStaticMeshComponent* MainRotorStaticMesh;
-	UPROPERTY(EditAnywhere, Category = "Main Body")
-		UCockpit* Cockpit;
-	UPROPERTY(EditAnywhere, Category = "Main Body")
+	UFlightPhysics * FlightPhysics;
+	UPROPERTY(EditAnywhere, Category = "Apache Helicopter")
 		UApacheEngine* RightEngine;
-	UPROPERTY(EditAnywhere, Category = "Main Body")
+	UPROPERTY(EditAnywhere, Category = "Apache Helicopter")
 		UApacheEngine* LeftEngine;
-
-
-	UPROPERTY(EditAnywhere, Category = "Tail")
-		UStaticMeshComponent* Tail;
-	UPROPERTY(EditAnywhere, Category = "Tail")
-		UApacheRotor* TailRotor;
-	UPROPERTY(EditAnywhere, Category = "Tail")
-		UStaticMeshComponent* TailRotorStaticMesh;
-
-
-
+	UPROPERTY(EditAnywhere, Category = "Apache Helicopter")
+		UCockpit* Cockpit;
+	UPROPERTY(EditAnywhere, Category = "Apache Helicopter")
+		UApacheRotor* MainRotor;
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+	UPROPERTY(EditAnywhere, Category = "Apache Helicopter")
+		UCameraComponent* OurCamera;
+	UPROPERTY(EditAnywhere, Category = "Apache Helicopter")
+		UStaticMeshComponent* Body;
+	UPROPERTY(EditAnywhere, Category = "Apache Helicopter")
+		UStaticMeshComponent* MainRotorStaticMesh;
+
+	UPROPERTY(EditAnywhere, Category = "Apache Helicopter")
+		UStaticMeshComponent* Tail;
 
 public:	
 	// Called every frame

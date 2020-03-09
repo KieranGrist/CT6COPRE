@@ -11,35 +11,28 @@ AB_Apache::AB_Apache()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+	FlightPhysics = CreateDefaultSubobject<UFlightPhysics>("FlightPhysics");
+	FlightPhysics->Apache = this;
 	RootComponent = CreateDefaultSubobject<USceneComponent>("RootComponent");
 
 	Body = CreateDefaultSubobject<UStaticMeshComponent>("Body");
 	Tail = CreateDefaultSubobject<UStaticMeshComponent>("Tail");
 
 	Tail->SetRelativeLocation(FVector(-854.415527f, 0, 81.176666f));
-
-	TailRotorStaticMesh = CreateDefaultSubobject<UStaticMeshComponent>("TailRotorStaticMesh");
 	MainRotorStaticMesh = CreateDefaultSubobject<UStaticMeshComponent>("MainRotorStaticMesh");
 
 	MainRotor = CreateDefaultSubobject<UApacheRotor>("MainRotor");
-	TailRotor = CreateDefaultSubobject<UApacheRotor>("TailRotor");
-
 	MainRotor->Rotor = MainRotorStaticMesh;
-	TailRotor->Rotor = TailRotorStaticMesh;
-
 	Cockpit = CreateDefaultSubobject<UCockpit>("Cockpit");
-	Cockpit->Apache = this;
 
 OurCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("OurCamera"));
 	OurCamera->SetRelativeLocation(FVector(-250.0f, 0.0f, 250.0f));
-	OurCamera->SetRelativeRotation(FRotator(-45.0f, 0.0f, 0.0f));
-
-	FAttachmentTransformRules ARules(EAttachmentRule::KeepRelative, EAttachmentRule::KeepRelative, EAttachmentRule::KeepRelative,false);
-
-	Body->AttachToComponent(RootComponent, ARules);
-	MainRotorStaticMesh->AttachToComponent(Body, ARules);
-	Tail->AttachToComponent(Body, ARules);
-	TailRotorStaticMesh->AttachToComponent(Tail, ARules);
+	FAttachmentTransformRules ARules(EAttachmentRule::KeepRelative, EAttachmentRule::KeepRelative, EAttachmentRule::KeepRelative, false);
+	FAttachmentTransformRules BRules(EAttachmentRule::KeepRelative, EAttachmentRule::KeepRelative, EAttachmentRule::KeepRelative, false);
+	Body->AttachToComponent(RootComponent, BRules);
+	MainRotorStaticMesh->AttachToComponent(Body,ARules);
+	Tail->AttachToComponent(Body, BRules);
+	MainRotorStaticMesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 
 	OurCamera->SetupAttachment(Body);
 	RightEngine = CreateDefaultSubobject<UApacheEngine>("RightEngine");
@@ -48,21 +41,18 @@ OurCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("OurCamera"));
 
 // Called when the game starts or when spawned
 void AB_Apache::BeginPlay()
-{
+{	
 	Super::BeginPlay();
 	Cockpit->Apache = this;
 	Cockpit->Collective->Apache = this;
+	Cockpit->Joystick->Apache = this;
 	MainRotor->Apache = this;
-	TailRotor -> Apache = this;
-
-
 }
 
 // Called every frame
 void AB_Apache::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	//Body->SetLinearDamping(LinerDampening);
 	this->SetActorLocation(Body->GetComponentLocation());
 	this->SetActorRotation(Body->GetComponentQuat());	
 }

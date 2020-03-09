@@ -28,22 +28,8 @@ public:
 	UPROPERTY(EditAnywhere)
 		float PowerToApply = 0;
 	UPROPERTY(EditAnywhere)
-		float Speed;
-	UPROPERTY(EditAnywhere)
 		float Multiplier = 192714653696.0;
 
-	UPrimitiveComponent* PhysicsRef;
-
-	UPROPERTY(EditAnywhere, Category = "Debug")
-		float Stage1;
-	UPROPERTY(EditAnywhere, Category = "Debug")
-		float	Stage2;
-	UPROPERTY(EditAnywhere, Category = "Debug")
-		float Stage3;
-	UPROPERTY(EditAnywhere, Category = "Debug")
-		float 	Stage4;
-	UPROPERTY(EditAnywhere, Category = "Debug")
-		FVector UpVector;
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;

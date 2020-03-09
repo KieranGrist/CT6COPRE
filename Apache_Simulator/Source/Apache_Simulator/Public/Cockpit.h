@@ -8,7 +8,6 @@
 #include "Helicopter Logic/ApacheCollective.h"
 #include"Switches/EngineSwitch.h"
 #include "Engine/World.h"
-#include "Components/PrimitiveComponent.h"
 #include "Components/StaticMeshComponent.h"
 #include "Components/ActorComponent.h"
 #include "Helicopter Logic/ApacheJoystick.h"
