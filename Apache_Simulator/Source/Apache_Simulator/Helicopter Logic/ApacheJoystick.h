@@ -23,6 +23,7 @@ public:
 	FVector ApacheRotation;
 	UPROPERTY(EditAnywhere)
 		AB_Apache* Apache;
+
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;

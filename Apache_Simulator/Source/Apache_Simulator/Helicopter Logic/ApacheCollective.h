@@ -28,7 +28,7 @@ public:
 	UPROPERTY(EditAnywhere)
 		float PowerToApply = 0;
 	UPROPERTY(EditAnywhere)
-		float Multiplier = 192714653696.0;
+		float Multiplier = 0;
 
 protected:
 	// Called when the game starts
@@ -38,7 +38,7 @@ public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
-	void NoPower(float DeltaTime);
+
 
 
 

@@ -38,7 +38,7 @@ public:
 		float Speed = 0;
 	UPROPERTY(EditAnywhere)
 		float Height = 0;
-
+	UPrimitiveComponent* PhysicsRef; 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;

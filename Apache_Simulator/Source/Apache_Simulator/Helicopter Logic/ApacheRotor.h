@@ -22,8 +22,6 @@ public:
 
 	UPROPERTY(EditAnywhere, Category = "Rotor Properties")
 		float RotorTime = .001f;
-	UPROPERTY(EditAnywhere)
-		UStaticMeshComponent* Rotor;
 
 protected:
 	// Called when the game starts

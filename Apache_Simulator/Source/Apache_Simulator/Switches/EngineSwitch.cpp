@@ -30,10 +30,14 @@ void UEngineSwitch::TickComponent(float DeltaTime, ELevelTick TickType, FActorCo
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
 	if (IsOn)
+	{
 		ActionWhenOn();
+	}
 	else
+	{
 		ActionWhenOff();
-	// ...
+	}
+
 }
 
 void UEngineSwitch::ActionWhenOn()

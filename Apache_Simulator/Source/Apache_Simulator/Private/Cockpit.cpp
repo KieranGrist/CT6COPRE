@@ -2,6 +2,10 @@
 
 
 #include "Cockpit.h"
+#include "Components/PrimitiveComponent.h"
+#include "GameFramework/Actor.h"
+#include "GameFramework/Character.h"
+#include "Components/StaticMeshComponent.h"
 #include "B_Apache.h"
 
 // Sets default values
@@ -13,21 +17,22 @@ UCockpit::UCockpit()
 	LeftEngineSwitch = CreateDefaultSubobject<UEngineSwitch>("LeftEngineSwitch");
 	Joystick = CreateDefaultSubobject<UApacheJoystick >("Joystick");
 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-
-
 	Collective = CreateDefaultSubobject <UApacheCollective>("Collective");
-	Joystick->Apache = Apache;
-	Collective->Apache = Apache;
 }
 
 // Called when the game starts or when spawned
 void UCockpit::BeginPlay()
 {
 	Super::BeginPlay();
-	Joystick->Apache = Apache;
-	Collective->Apache = Apache;
-	RightEngineSwitch->ApacheEngine = Apache->RightEngine;
-	LeftEngineSwitch->ApacheEngine = Apache->LeftEngine;
+
+	if (!PhysicsRef)
+	{
+		TArray< UPrimitiveComponent*> Array;
+		Apache->GetComponents(Array);
+		if (Array[0])
+			PhysicsRef = Array[0];
+	}
+
 }
 
 // Called every frame
@@ -35,15 +40,14 @@ void UCockpit::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompone
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-		Speed = Apache->FlightPhysics->Velocity.Size();
-
-	FVector Loc = Apache->GetTransform().GetLocation();
-	FRotator Rot = FRotator(Apache->GetTransform().GetRotation());
-	FHitResult Hit;
-	FVector Start = Loc;
-	FVector End = -Apache->GetActorUpVector();
-	GetWorld()->LineTraceSingleByChannel(Hit, Loc, End, ECC_Visibility);
-	Height = FVector::Distance(Apache->GetTransform().GetLocation(), Hit.Location);
-	Height -= 28.685221f;
+	if (!PhysicsRef)
+	{
+		TArray< UPrimitiveComponent*> Array;
+		Apache->GetComponents(Array);
+		if (Array[0])
+			PhysicsRef = Array[0];
+	}
+	else
+	Speed = PhysicsRef->GetComponentVelocity().Size();
 }
 

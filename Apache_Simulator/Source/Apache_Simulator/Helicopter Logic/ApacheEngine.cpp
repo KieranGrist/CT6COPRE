@@ -33,9 +33,13 @@ void UApacheEngine::TickComponent(float DeltaTime, ELevelTick TickType, FActorCo
 	Power = FMath::Clamp(Power, 0.0f, 50.0f);
 
 	if (IsOn)
+	{
 		EngineOn();
+	}
 	else
+	{
 		EngineOff();
+	}
 }
 
 void UApacheEngine::EngineOn()

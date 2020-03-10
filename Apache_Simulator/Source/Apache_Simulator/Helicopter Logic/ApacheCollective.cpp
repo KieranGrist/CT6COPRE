@@ -38,25 +38,21 @@ void UApacheCollective::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 	Collective = FMath::Clamp(Collective, 0.0f, 1.0f);
 	Thrust = Collective * 100;
 	Thrust = FMath::Clamp(Thrust, 0.0F, Power);
-
-
 	//Collective = FMath::Lerp(Collective, .515f, DeltaTime);
-
 //0 = -0.5, 50 = 0, 100 = 0.5 
-
-	 PowerToApply = 0;
-	 PowerToApply = Thrust;
- PowerToApply *= Multiplier;
-	 PowerToApply *= DeltaTime;
+	PowerToApply = 0;
+	PowerToApply = Thrust;
+	PowerToApply *= Multiplier;
+	PowerToApply *= DeltaTime;
 
 
 
 	if (Apache->MainRotor->PropellorRotation > 6)
 	{
-		Apache->FlightPhysics->AddForce(FVector(Apache->MainRotor->Rotor->GetUpVector() * PowerToApply));
+		Apache->ApacheBody->AddForce(FVector(Apache->Rotor->GetUpVector() * PowerToApply));
 
 	}
-	
-	
+
+
 }
 

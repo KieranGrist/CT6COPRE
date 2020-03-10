@@ -12,6 +12,9 @@ UApacheRotor::UApacheRotor()
 	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
 	// off to improve performance if you don't need them.
 	PrimaryComponentTick.bCanEverTick = true;
+	
+
+
 
 }
 
@@ -20,9 +23,8 @@ UApacheRotor::UApacheRotor()
 void UApacheRotor::BeginPlay()
 {
 	Super::BeginPlay();
-
 	// ...
-
+	
 }
 
 void UApacheRotor::RotateRotor()
@@ -44,7 +46,7 @@ void UApacheRotor::TickComponent(float DeltaTime, ELevelTick TickType, FActorCom
 	PropellorRotation = FMath::Clamp(PropellorRotation, 0.0f, 7.0f);
 	FRotator  TempRotation = FRotator(0, PropellorRotation, 0);
 	FQuat QuatRotation = FQuat(TempRotation);
-	Rotor->AddWorldRotation(QuatRotation, false, 0, ETeleportType::None);
+	Apache->Rotor->AddWorldRotation(QuatRotation, false, 0, ETeleportType::None);
 	if (Apache->Cockpit->LeftEngineSwitch->IsOn && Apache->Cockpit->RotorBreakSwitch->IsOn == false)
 		RotateRotor();
 
