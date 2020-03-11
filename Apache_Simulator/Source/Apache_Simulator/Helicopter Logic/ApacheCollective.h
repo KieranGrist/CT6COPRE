@@ -28,7 +28,7 @@ public:
 	UPROPERTY(EditAnywhere)
 		float PowerToApply = 0;
 	UPROPERTY(EditAnywhere)
-		float Multiplier = 0;
+		float Multiplier = 112308552.0f;
 
 protected:
 	// Called when the game starts

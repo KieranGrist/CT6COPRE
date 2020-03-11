@@ -6,6 +6,7 @@
 #include "GameFramework/Actor.h"
 #include "GameFramework/Character.h"
 #include "Components/StaticMeshComponent.h"
+#include "Containers/Array.h"
 #include "B_Apache.h"
 
 // Sets default values
@@ -24,15 +25,6 @@ UCockpit::UCockpit()
 void UCockpit::BeginPlay()
 {
 	Super::BeginPlay();
-
-	if (!PhysicsRef)
-	{
-		TArray< UPrimitiveComponent*> Array;
-		Apache->GetComponents(Array);
-		if (Array[0])
-			PhysicsRef = Array[0];
-	}
-
 }
 
 // Called every frame
@@ -44,10 +36,12 @@ void UCockpit::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompone
 	{
 		TArray< UPrimitiveComponent*> Array;
 		Apache->GetComponents(Array);
-		if (Array[0])
-			PhysicsRef = Array[0];
+		if (Array[1])
+			PhysicsRef = Array[1];
 	}
-	else
+	auto velocity = PhysicsRef->GetComponentVelocity();
+	UE_LOG(LogTemp, Warning, TEXT("Speed is %f"), PhysicsRef->GetComponentVelocity().Size());
 	Speed = PhysicsRef->GetComponentVelocity().Size();
+
 }
 
