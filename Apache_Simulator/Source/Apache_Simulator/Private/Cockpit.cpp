@@ -40,7 +40,6 @@ void UCockpit::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompone
 			PhysicsRef = Array[1];
 	}
 	auto velocity = PhysicsRef->GetComponentVelocity();
-	UE_LOG(LogTemp, Warning, TEXT("Speed is %f"), PhysicsRef->GetComponentVelocity().Size());
 	Speed = PhysicsRef->GetComponentVelocity().Size();
 
 }

@@ -2,10 +2,8 @@
 
 
 #include "B_Apache.h"
-#include "Engine/EngineTypes.h"
-#include "Components/StaticMeshComponent.h"
-#include "Camera/CameraComponent.h"
-#include "GameFramework/Actor.h"
+#include "Components/ActorComponent.h"
+#include "Components/InputComponent.h"
 // Sets default values
 AB_Apache::AB_Apache()
 {
@@ -21,8 +19,11 @@ ApacheBody = CreateDefaultSubobject<UStaticMeshComponent>("ApacheBody");
 ApacheBody->AttachToComponent(RootComponent, BRules);
 
  Rotor = CreateDefaultSubobject<UStaticMeshComponent>("Rotor");
- Rotor->AttachToComponent(ApacheBody, ARules);
+ FAttachmentTransformRules CRules(EAttachmentRule::KeepRelative, EAttachmentRule::KeepRelative, EAttachmentRule::KeepRelative, false);
+ Rotor->AttachToComponent(ApacheBody, CRules);
  Rotor->SetRelativeLocation(FVector(-69.173035f, 0, 503.540344f));
+ Rotor->SetRelativeRotation(FRotator(0, 0, 0));
+
 
  GunnerDoor = CreateDefaultSubobject<UStaticMeshComponent>("GunnerDoor");	
  GunnerDoor->AttachToComponent(ApacheBody, ARules);
@@ -79,10 +80,79 @@ void AB_Apache::BeginPlay()
 	MainRotor->Apache = this;
 
 }
-
-
-void AB_Apache::SetupPlayerInputComponent(UInputComponent* InputComponent)
+void AB_Apache::PitchUp()
 {
+	Cockpit->Joystick-> JoystickRotation.Y -= 10;
+}
+void AB_Apache::PitchDown()
+{
+	Cockpit->Joystick->JoystickRotation.Y += 10;
+}
+void AB_Apache::YawRight()
+{
+	Cockpit->Joystick->JoystickRotation.Z += 10;
+}
+void AB_Apache::YawLeft()
+{
+	Cockpit->Joystick->JoystickRotation.Z -= 10;
+}
+void AB_Apache::RollRight()
+{
+	Cockpit->Joystick->JoystickRotation.X -= 10;
+}
+void AB_Apache::RollLeft()
+{
+	Cockpit->Joystick->JoystickRotation.X += 10;
+}
+
+
+void AB_Apache::CollectiveRaise()
+{
+	Cockpit->Collective->Collective += .01f;
+}
+void AB_Apache::CollectiveLower()
+{
+	Cockpit->Collective->Collective -= .01f;
+}
+
+
+
+
+
+void AB_Apache::LeftEngineSwitchToggle()
+{
+	Cockpit->LeftEngineSwitch->IsOn = !Cockpit->LeftEngineSwitch->IsOn;
+}
+void AB_Apache::RightEngineSwitchToggle()
+{
+
+		Cockpit->RightEngineSwitch->IsOn = !Cockpit->RightEngineSwitch->IsOn;
+}
+
+void AB_Apache::RotorBreakToggle()
+{
+	Cockpit->RotorBreakSwitch->IsOn = !Cockpit->RotorBreakSwitch->IsOn;
+}
+
+
+void AB_Apache::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
+{
+	Super::SetupPlayerInputComponent(InputComponent);
+	InputComponent->BindAction("Pitch Up", IE_Pressed, this, &AB_Apache::PitchUp);
+	InputComponent->BindAction("Pitch Down", IE_Pressed, this, &AB_Apache::PitchDown);
+	InputComponent->BindAction("Yaw Right", IE_Pressed, this, &AB_Apache::YawRight);
+	InputComponent->BindAction("Yaw Left", IE_Pressed, this, &AB_Apache::YawLeft);
+	InputComponent->BindAction("Roll Right", IE_Pressed, this, &AB_Apache::RollRight);
+	InputComponent->BindAction("Roll Left", IE_Pressed, this, &AB_Apache::RollLeft);
+
+	InputComponent->BindAction("Collective Raise", IE_Pressed, this, &AB_Apache::CollectiveRaise);
+	InputComponent->BindAction("Collective Lower", IE_Pressed, this, &AB_Apache::CollectiveLower);
+
+
+	InputComponent->BindAction("LeftEngineSwitchToggle", IE_Pressed, this, &AB_Apache::LeftEngineSwitchToggle);
+	InputComponent->BindAction("RightEngineSwitchToggle", IE_Pressed, this, &AB_Apache::RightEngineSwitchToggle);
+	InputComponent->BindAction("RotorBreakToggle", IE_Pressed, this, &AB_Apache::RotorBreakToggle);
+
 }
 
 // Called every frame

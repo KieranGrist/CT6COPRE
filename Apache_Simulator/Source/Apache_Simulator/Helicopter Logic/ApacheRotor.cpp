@@ -44,9 +44,13 @@ void UApacheRotor::TickComponent(float DeltaTime, ELevelTick TickType, FActorCom
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
 	PropellorRotation = FMath::Clamp(PropellorRotation, 0.0f, 7.0f);
+
 	FRotator  TempRotation = FRotator(0, PropellorRotation, 0);
 	FQuat QuatRotation = FQuat(TempRotation);
-	Apache->Rotor->AddWorldRotation(QuatRotation, false, 0, ETeleportType::None);
+	Apache->Rotor->AddRelativeRotation(QuatRotation, false, 0, ETeleportType::None);
+	UE_LOG(LogTemp, Warning, TEXT("Rotor Rotation is %s"),
+		*Apache->Rotor->GetRelativeTransform().GetRotation().Euler().ToString());
+	//Apache->Rotor->SetRelativeRotation(FRotator(0, 0, Apache->Rotor->GetRelativeTransform().GetRotation().Z));
 	if (Apache->Cockpit->LeftEngineSwitch->IsOn && Apache->Cockpit->RotorBreakSwitch->IsOn == false)
 		RotateRotor();
 

@@ -6,16 +6,12 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "Cockpit.h"
 #include "GameFramework/Pawn.h"
 #include "Camera/CameraComponent.h"
-#include "Components/SceneComponent.h"
-#include "Helicopter Logic/ApacheRotor.h"
-#include "Components/PrimitiveComponent.h"
-#include "GameFramework/Character.h"
-#include "Components/ActorComponent.h"
-#include "Components/StaticMeshComponent.h"
+#include "Helicopter Logic/ApacheEngine.h"
 #include "Helicopter Logic/ApacheGun.h"
+#include "Helicopter Logic/ApacheRotor.h"
+#include "Cockpit.h"
 #include "B_Apache.generated.h"
 
 UCLASS()
@@ -63,9 +59,20 @@ public:
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+	void PitchUp();
+	void PitchDown();
+	void YawRight();
+	void YawLeft();
+	void RollRight();
+	void RollLeft();
+	void CollectiveRaise();
+	void CollectiveLower();
+	void LeftEngineSwitchToggle();
+	void RightEngineSwitchToggle();
+	void RotorBreakToggle();
 	UPROPERTY(EditAnywhere, Category = "Apache Helicopter")
 		UCameraComponent* OurCamera;
-	virtual void SetupPlayerInputComponent(class UInputComponent* InputComponent) override;
+	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;

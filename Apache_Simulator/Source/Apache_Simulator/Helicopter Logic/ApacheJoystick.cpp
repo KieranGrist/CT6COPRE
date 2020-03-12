@@ -3,6 +3,7 @@
 
 #include "ApacheJoystick.h"
 #include "B_Apache.h"
+#include "Components/InputComponent.h"
 #include "Components/StaticMeshComponent.h"
 #include "Components/ActorComponent.h"
 #include "Math/UnrealMathUtility.h"
@@ -24,30 +25,7 @@ void UApacheJoystick::BeginPlay()
 	Super::BeginPlay();
 }
 
-void UApacheJoystick::PitchUp()
-{
-	JoystickRotation.Y -= 10;
-}
-void UApacheJoystick::PitchDown()
-{
-	JoystickRotation.Y += 10;
-}
-void UApacheJoystick::YawRight()
-{
-	JoystickRotation.Z += 10;
-}
-void UApacheJoystick::YawLeft()
-{
-	JoystickRotation.Z -= 10;
-}
-void UApacheJoystick::RollRight()
-{
-	JoystickRotation.X -= 10;
-}
-void UApacheJoystick::RollLeft()
-{
-	JoystickRotation.X += 10;
-}
+
 // Called every frame
 void UApacheJoystick::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {

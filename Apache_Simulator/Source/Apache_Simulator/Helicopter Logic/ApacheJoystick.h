@@ -32,17 +32,5 @@ protected:
 public:	
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
-
-	void PitchUp();
-
-	void PitchDown();
-
-	void YawRight();
-
-	void YawLeft();
-
-	void RollRight();
-
-	void RollLeft();
 		
 };
