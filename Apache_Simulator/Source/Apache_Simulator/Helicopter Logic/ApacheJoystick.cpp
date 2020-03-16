@@ -31,10 +31,10 @@ void UApacheJoystick::TickComponent(float DeltaTime, ELevelTick TickType, FActor
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 	
-	JoystickRotation.X = FMath::Clamp(JoystickRotation.X, -90.0f, 90.0f);
-	JoystickRotation.Y = FMath::Clamp(JoystickRotation.Y, -90.0f, 90.0f);
-	JoystickRotation.Z = FMath::Clamp(JoystickRotation.Z, -90.0f, 90.0f);
-
+	JoystickRotation = Apache->FlightStick->GetRelativeTransform().GetRotation().Euler();
+	JoystickRotation.X *= -5;
+	JoystickRotation.Y *= -5;
+	JoystickRotation.Z *= 5;
 	ApacheRotation = JoystickRotation * Multiplier;
 
 

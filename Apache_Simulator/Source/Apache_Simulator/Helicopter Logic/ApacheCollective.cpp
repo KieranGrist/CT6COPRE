@@ -35,11 +35,21 @@ void UApacheCollective::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 	Power = Apache->LeftEngine->Power + Apache->RightEngine->Power;
 	Power = FMath::Clamp(Power, 0.0f, 100.0f);
-	Collective = FMath::Clamp(Collective, 0.0f, 1.0f);
+
 	Thrust = Collective * 100;
-	Thrust = FMath::Clamp(Thrust, 0.0F, Power);
-	//Collective = FMath::Lerp(Collective, .515f, DeltaTime);
-//0 = -0.5, 50 = 0, 100 = 0.5 
+	Collective = FMath::Clamp(Thrust, 0.0F, Power);
+
+
+
+
+
+
+
+	Collective = Apache->Collective->GetRelativeTransform().GetRotation().Euler().Y ;	
+	Collective = (-(Collective - 50)) * 0.025f;
+
+
+
 	PowerToApply = 0;
 	PowerToApply = Thrust;
 	PowerToApply *= Multiplier;

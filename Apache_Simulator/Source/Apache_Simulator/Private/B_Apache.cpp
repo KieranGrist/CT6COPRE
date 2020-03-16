@@ -44,6 +44,9 @@ Gun->SetRelativeLocation(FVector(440.466095f, 0, 108.680374f));
 
  Collective = CreateDefaultSubobject<UStaticMeshComponent>("Collective");
  Collective->AttachToComponent(ApacheBody, ARules);
+ Collective->SetRelativeLocation(FVector(264.123779f, -59.821503f, 229.533386f));
+ Collective-> SetRelativeRotation(FRotator(0, 50, 0));
+
 
 	Cockpit = CreateDefaultSubobject<UCockpit>("Cockpit");
 	Cockpit->Collective->Apache = this;
@@ -64,7 +67,7 @@ Gun->SetRelativeLocation(FVector(440.466095f, 0, 108.680374f));
 	OurCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("OurCamera"));
 
 	OurCamera->SetupAttachment(ApacheBody);
-	OurCamera->SetRelativeLocation(FVector(-2332.526855f, 0.0f, 819.872986));
+	OurCamera->SetRelativeLocation(FVector(162.940506f, 0.0f, 361.970825f));
 	OurCamera->SetRelativeRotation(FRotator(0, -13.618747f, 0));
 }
 
@@ -82,37 +85,41 @@ void AB_Apache::BeginPlay()
 }
 void AB_Apache::PitchUp()
 {
-	Cockpit->Joystick-> JoystickRotation.Y -= 10;
+
+	FlightStick->AddRelativeRotation(FRotator(1,0 , 0));
+
+
+
 }
 void AB_Apache::PitchDown()
 {
-	Cockpit->Joystick->JoystickRotation.Y += 10;
+	FlightStick->AddRelativeRotation(FRotator(-1, 0, 0));
 }
 void AB_Apache::YawRight()
 {
-	Cockpit->Joystick->JoystickRotation.Z += 10;
+	FlightStick->AddRelativeRotation(FRotator(0,1 , 0));
 }
 void AB_Apache::YawLeft()
 {
-	Cockpit->Joystick->JoystickRotation.Z -= 10;
+	FlightStick->AddRelativeRotation(FRotator(0, -1, 0));
 }
 void AB_Apache::RollRight()
 {
-	Cockpit->Joystick->JoystickRotation.X -= 10;
+	FlightStick->AddRelativeRotation(FRotator(0, 0, 1));
 }
 void AB_Apache::RollLeft()
 {
-	Cockpit->Joystick->JoystickRotation.X += 10;
+	FlightStick->AddRelativeRotation(FRotator(0,0 , -1));
 }
 
 
 void AB_Apache::CollectiveRaise()
 {
-	Cockpit->Collective->Collective += .01f;
+	Collective->AddRelativeRotation(FRotator(-1, 0, 0));
 }
 void AB_Apache::CollectiveLower()
 {
-	Cockpit->Collective->Collective -= .01f;
+	Collective->AddRelativeRotation(FRotator(1, 0, 0));
 }
 
 
@@ -161,5 +168,7 @@ void AB_Apache::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 	this->SetActorLocation(ApacheBody->GetComponentLocation());
 	this->SetActorRotation(ApacheBody->GetComponentQuat());
+
+
 }
 
