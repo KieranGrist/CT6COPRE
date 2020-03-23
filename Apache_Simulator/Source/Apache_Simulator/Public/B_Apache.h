@@ -7,7 +7,6 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "GameFramework/Pawn.h"
-#include "Camera/CameraComponent.h"
 #include "Helicopter Logic/ApacheEngine.h"
 #include "Helicopter Logic/ApacheGun.h"
 #include "Helicopter Logic/ApacheRotor.h"
@@ -70,8 +69,6 @@ protected:
 	void LeftEngineSwitchToggle();
 	void RightEngineSwitchToggle();
 	void RotorBreakToggle();
-	UPROPERTY(EditAnywhere, Category = "Apache Helicopter")
-		UCameraComponent* OurCamera;
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 public:	
 	// Called every frame

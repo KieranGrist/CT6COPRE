@@ -1,0 +1,18 @@
+{
+	"source": "UE",
+	"applications": [
+		{
+			"app_key": "application.generated.ue.virtual-reality-bp-game-template-cl-9631420.ue4editor.exe",
+			"launch_type": "url",
+			"url": "steam://launch/",
+			"action_manifest_path": "D:/CT6COPRE/Apache_Simulator/Config/SteamVRBindings/steamvr_manifest.json",
+			"strings":
+			{
+				"en_us":
+				{
+					"name": "Virtual Reality BP Game Template-CL-9631420 [UE Editor]"
+				}
+			}
+		}
+	]
+}

@@ -63,12 +63,6 @@ Gun->SetRelativeLocation(FVector(440.466095f, 0, 108.680374f));
 	MainRotor->Apache = this;
 
 	ChainGun = CreateDefaultSubobject<UApacheGun>("ChainGun");
-
-	OurCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("OurCamera"));
-
-	OurCamera->SetupAttachment(ApacheBody);
-	OurCamera->SetRelativeLocation(FVector(162.940506f, 0.0f, 361.970825f));
-	OurCamera->SetRelativeRotation(FRotator(0, -13.618747f, 0));
 }
 
 // Called when the game starts or when spawned
