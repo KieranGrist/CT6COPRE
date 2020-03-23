@@ -49,7 +49,7 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Apache Mesh")
 		UStaticMeshComponent* Gun;
 
-	UPROPERTY(EditAnywhere, Category = "Apache Mesh")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Apache Mesh")
 	UStaticMeshComponent* FlightStick;
 
 	UPROPERTY(EditAnywhere, Category = "Apache Mesh")
