@@ -38,19 +38,11 @@ Gun = CreateDefaultSubobject<UStaticMeshComponent>("Gun");
 Gun->AttachToComponent(ApacheBody, ARules);
 Gun->SetRelativeLocation(FVector(440.466095f, 0, 108.680374f));
 
- FlightStick = CreateDefaultSubobject<UStaticMeshComponent>("FlightStick");
- FlightStick->AttachToComponent(ApacheBody, ARules);
- FlightStick->SetRelativeLocation(FVector(278.58075f, 0, 237.448517f));
 
- Collective = CreateDefaultSubobject<UStaticMeshComponent>("Collective");
- Collective->AttachToComponent(ApacheBody, ARules);
- Collective->SetRelativeLocation(FVector(264.123779f, -59.821503f, 229.533386f));
- Collective-> SetRelativeRotation(FRotator(0, 50, 0));
 
 
 	Cockpit = CreateDefaultSubobject<UCockpit>("Cockpit");
-	Cockpit->Collective->Apache = this;
-	Cockpit->Joystick->Apache = this;
+
 	Cockpit->Apache = this;
 
 	RightEngine = CreateDefaultSubobject<UApacheEngine>("RightEngine");
@@ -69,54 +61,12 @@ Gun->SetRelativeLocation(FVector(440.466095f, 0, 108.680374f));
 void AB_Apache::BeginPlay()
 {
 	Super::BeginPlay();
-	Cockpit->Collective->Apache = this;
-	Cockpit->Joystick->Apache = this;
 	Cockpit->Apache = this;
 	Cockpit->RightEngineSwitch->ApacheEngine = RightEngine;
 	Cockpit->LeftEngineSwitch->ApacheEngine = LeftEngine;
 	MainRotor->Apache = this;
 
 }
-void AB_Apache::PitchUp()
-{
-
-	FlightStick->AddRelativeRotation(FRotator(1,0 , 0));
-
-
-
-}
-void AB_Apache::PitchDown()
-{
-	FlightStick->AddRelativeRotation(FRotator(-1, 0, 0));
-}
-void AB_Apache::YawRight()
-{
-	FlightStick->AddRelativeRotation(FRotator(0,1 , 0));
-}
-void AB_Apache::YawLeft()
-{
-	FlightStick->AddRelativeRotation(FRotator(0, -1, 0));
-}
-void AB_Apache::RollRight()
-{
-	FlightStick->AddRelativeRotation(FRotator(0, 0, 1));
-}
-void AB_Apache::RollLeft()
-{
-	FlightStick->AddRelativeRotation(FRotator(0,0 , -1));
-}
-
-
-void AB_Apache::CollectiveRaise()
-{
-	Collective->AddRelativeRotation(FRotator(-1, 0, 0));
-}
-void AB_Apache::CollectiveLower()
-{
-	Collective->AddRelativeRotation(FRotator(1, 0, 0));
-}
-
-
 
 
 
@@ -139,15 +89,6 @@ void AB_Apache::RotorBreakToggle()
 void AB_Apache::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(InputComponent);
-	InputComponent->BindAction("Pitch Up", IE_Pressed, this, &AB_Apache::PitchUp);
-	InputComponent->BindAction("Pitch Down", IE_Pressed, this, &AB_Apache::PitchDown);
-	InputComponent->BindAction("Yaw Right", IE_Pressed, this, &AB_Apache::YawRight);
-	InputComponent->BindAction("Yaw Left", IE_Pressed, this, &AB_Apache::YawLeft);
-	InputComponent->BindAction("Roll Right", IE_Pressed, this, &AB_Apache::RollRight);
-	InputComponent->BindAction("Roll Left", IE_Pressed, this, &AB_Apache::RollLeft);
-
-	InputComponent->BindAction("Collective Raise", IE_Pressed, this, &AB_Apache::CollectiveRaise);
-	InputComponent->BindAction("Collective Lower", IE_Pressed, this, &AB_Apache::CollectiveLower);
 
 
 	InputComponent->BindAction("LeftEngineSwitchToggle", IE_Pressed, this, &AB_Apache::LeftEngineSwitchToggle);

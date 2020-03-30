@@ -8,22 +8,22 @@
 		{
 			"sources": [
 				{
-					"mode": "trigger",
-					"path": "/user/hand/left/input/trigger",
+					"mode": "grab",
+					"path": "/user/hand/left/input/grip",
 					"inputs":
 					{
-						"click":
+						"grab":
 						{
 							"output": "/actions/main/in/GrabLeft"
 						}
 					}
 				},
 				{
-					"mode": "trigger",
-					"path": "/user/hand/right/input/trigger",
+					"mode": "grab",
+					"path": "/user/hand/right/input/grip",
 					"inputs":
 					{
-						"click":
+						"grab":
 						{
 							"output": "/actions/main/in/GrabRight"
 						}

@@ -5,12 +5,10 @@
 
 #include "CoreMinimal.h"
 #include "Switches/RotorBreakSwitch.h"
-#include "Helicopter Logic/ApacheCollective.h"
 #include"Switches/EngineSwitch.h"
 #include "Engine/World.h"
 #include "Components/StaticMeshComponent.h"
 #include "Components/ActorComponent.h"
-#include "Helicopter Logic/ApacheJoystick.h"
 #include "Cockpit.generated.h"
 class AB_Apache;
 UCLASS()
@@ -30,10 +28,6 @@ public:
 		UEngineSwitch* RightEngineSwitch;
 	UPROPERTY(EditAnywhere, Category = "Pilot")
 		URotorBreakSwitch* RotorBreakSwitch;
-	UPROPERTY(EditAnywhere, Category = "Pilot")
-		UApacheJoystick* Joystick;
-	UPROPERTY(EditAnywhere, Category = "Pilot")
-		UApacheCollective* Collective;
 	UPROPERTY(EditAnywhere)
 		float Speed = 0;
 	UPROPERTY(EditAnywhere)

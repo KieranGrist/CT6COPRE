@@ -1,12 +1,34 @@
 {
-	"name": "Default bindings for Vive Trackers",
-	"controller_type": "vive_tracker_camera",
+	"name": "Default bindings for Index Controllers",
+	"controller_type": "knuckles",
 	"last_edited_by": "UnrealEngine",
 	"bindings":
 	{
 		"/actions/main":
 		{
 			"sources": [
+				{
+					"mode": "grab",
+					"path": "/user/hand/left/input/grip",
+					"inputs":
+					{
+						"grab":
+						{
+							"output": "/actions/main/in/GrabLeft"
+						}
+					}
+				},
+				{
+					"mode": "grab",
+					"path": "/user/hand/left/input/grip",
+					"inputs":
+					{
+						"grab":
+						{
+							"output": "/actions/main/in/GrabRight"
+						}
+					}
+				},
 				{
 					"mode": "button",
 					"path": "/user/hand/left/input/thumbstick",
@@ -76,44 +98,33 @@
 			],
 			"poses": [
 				{
-					"output": "/actions/main/in/special1",
-					"path": "/user/hand/left/pose/back",
+					"output": "/actions/main/in/controllerleft",
+					"path": "/user/hand/left/pose/raw",
 					"requirement": "optional"
 				},
 				{
-					"output": "/actions/main/in/special2",
-					"path": "/user/hand/right/pose/back",
-					"requirement": "optional"
+					"output": "/actions/main/in/controllerright",
+					"path": "/user/hand/right/pose/raw"
+				}
+			],
+			"skeleton": [
+				{
+					"output": "/actions/main/in/skeletonleft",
+					"path": "/user/hand/left/input/skeleton/left"
 				},
 				{
-					"output": "/actions/main/in/special3",
-					"path": "/user/hand/left/pose/front",
-					"requirement": "optional"
+					"output": "/actions/main/in/skeletonright",
+					"path": "/user/hand/right/input/skeleton/right"
+				}
+			],
+			"haptics": [
+				{
+					"output": "/actions/main/out/vibrateleft",
+					"path": "/user/hand/left/output/haptic"
 				},
 				{
-					"output": "/actions/main/in/special4",
-					"path": "/user/hand/right/pose/front",
-					"requirement": "optional"
-				},
-				{
-					"output": "/actions/main/in/special5",
-					"path": "/user/hand/left/pose/frontandrolled",
-					"requirement": "optional"
-				},
-				{
-					"output": "/actions/main/in/special6",
-					"path": "/user/hand/right/pose/frontandrolled",
-					"requirement": "optional"
-				},
-				{
-					"output": "/actions/main/in/special7",
-					"path": "/user/hand/left/pose/pistolgrip",
-					"requirement": "optional"
-				},
-				{
-					"output": "/actions/main/in/special8",
-					"path": "/user/hand/right/pose/pistolgrip",
-					"requirement": "optional"
+					"output": "/actions/main/out/vibrateright",
+					"path": "/user/hand/right/output/haptic"
 				}
 			]
 		}

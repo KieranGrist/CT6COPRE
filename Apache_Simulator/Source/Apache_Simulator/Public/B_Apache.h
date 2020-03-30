@@ -21,51 +21,38 @@ class APACHE_SIMULATOR_API AB_Apache : public APawn
 public:	
 	// Sets default values for this actor's properties
 	AB_Apache();
-	UPROPERTY(EditAnywhere, Category = "Apache Helicopter")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Apache Helicopter")
 		UApacheEngine* RightEngine;
-	UPROPERTY(EditAnywhere, Category = "Apache Helicopter")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Apache Helicopter")
 		UApacheEngine* LeftEngine;
-	UPROPERTY(EditAnywhere, Category = "Apache Helicopter")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Apache Helicopter")
 		UCockpit* Cockpit;
-	UPROPERTY(EditAnywhere, Category = "Apache Helicopter")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Apache Helicopter")
 		UApacheRotor* MainRotor;
-	UPROPERTY(EditAnywhere, Category = "Apache Helicopter")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Apache Helicopter")
 	UApacheGun* ChainGun;
 
 
-	UPROPERTY(EditAnywhere, Category = "Apache Mesh")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Apache Mesh")
 
 		UStaticMeshComponent* ApacheBody;
-	UPROPERTY(EditAnywhere, Category = "Apache Mesh")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Apache Mesh")
 		UStaticMeshComponent* Rotor;
 
-	UPROPERTY(EditAnywhere, Category = "Apache Mesh")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Apache Mesh")
 		UStaticMeshComponent* GunnerDoor;
-	UPROPERTY(EditAnywhere, Category = "Apache Mesh")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Apache Mesh")
 		UStaticMeshComponent* PilotDoor;
-	UPROPERTY(EditAnywhere, Category = "Apache Mesh")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Apache Mesh")
 		UStaticMeshComponent* Window;
 
-	UPROPERTY(EditAnywhere, Category = "Apache Mesh")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Apache Mesh")
 		UStaticMeshComponent* Gun;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Apache Mesh")
-	UStaticMeshComponent* FlightStick;
-
-	UPROPERTY(EditAnywhere, Category = "Apache Mesh")
-	UStaticMeshComponent* Collective;
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
-	void PitchUp();
-	void PitchDown();
-	void YawRight();
-	void YawLeft();
-	void RollRight();
-	void RollLeft();
-	void CollectiveRaise();
-	void CollectiveLower();
 	void LeftEngineSwitchToggle();
 	void RightEngineSwitchToggle();
 	void RotorBreakToggle();
