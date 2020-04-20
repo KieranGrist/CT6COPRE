@@ -46,6 +46,7 @@ void UApacheRotor::TickComponent(float DeltaTime, ELevelTick TickType, FActorCom
 	PropellorRotation = FMath::Clamp(PropellorRotation, 0.0f, 7.0f);
 
 	FRotator  TempRotation = FRotator(0, PropellorRotation, 0);
+	TempRotation.Pitch;
 	FQuat QuatRotation = FQuat(TempRotation);
 	Apache->Rotor->AddRelativeRotation(QuatRotation, false, 0, ETeleportType::None);
 	UE_LOG(LogTemp, Warning, TEXT("Rotor Rotation is %s"),

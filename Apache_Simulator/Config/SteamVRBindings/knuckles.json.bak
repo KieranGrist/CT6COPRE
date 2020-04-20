@@ -20,7 +20,7 @@
 				},
 				{
 					"mode": "grab",
-					"path": "/user/hand/left/input/grip",
+					"path": "/user/hand/right/input/grip",
 					"inputs":
 					{
 						"grab":
